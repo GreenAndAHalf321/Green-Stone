@@ -6,12 +6,11 @@ public final class GreenStone extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
+        getLogger().info("You have been given the time stone. Use it wisely!!");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        getLogger().info("The time stone has been taken from you! Sorry not sorry.");
     }
 }
