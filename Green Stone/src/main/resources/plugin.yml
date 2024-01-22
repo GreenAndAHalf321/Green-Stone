@@ -1,4 +1,4 @@
-name: Green Stone
+name: Green_Stone
 version: '${project.version}'
 main: at.foxel.greenstone.GreenStone
 api-version: '1.20'
