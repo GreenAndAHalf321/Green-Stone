@@ -61,13 +61,19 @@ The **start** command starts the playback of a recording.
 
 ### pause
 
-The **pause** command pauses the playback
+The **pause** command only works if  a playback is playing right now. If this is the case the playback will be paused.
+
+> /gs playback pause => pauses the currently running playback
 
 ### resume
 
 The **resume** command only works if the playback is paused. If this is the case the playback will be resumed
 
+> /gs playback resume => resumes the currently paused playback
+
 ### stop
 
 The **stop** command only works if a playback is loaded right now. If this is the case the playback will be stop and the world will be reset to the state before the playback has been started
+
+> /gs playback stop => stops the currently loaded playback and loads the current world state
 
