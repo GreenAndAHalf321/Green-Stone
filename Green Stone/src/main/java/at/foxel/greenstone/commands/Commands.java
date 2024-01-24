@@ -17,6 +17,12 @@ public class Commands implements CommandExecutor {
             GreenStone.getPluginLogger().info("Executed by Player");
         }
 
+
+
+        return false;
+    }
+
+    private boolean onRecording() {
         return false;
     }
 }
