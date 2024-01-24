@@ -1,7 +1,10 @@
 package at.foxel.greenstone.commands;
 
 import at.foxel.greenstone.GreenStone;
+import at.foxel.greenstone.useful.Colors;
+import org.bukkit.Bukkit;
 import org.bukkit.command.*;
+import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
     @Override
@@ -17,12 +20,26 @@ public class Commands implements CommandExecutor {
             GreenStone.getPluginLogger().info("Executed by Player");
         }
 
+        String[] subCommandArgs = new String[args.length - 1];
 
+        for(int i = 1; i < args.length; i++)
+            subCommandArgs[i - 1] = args[i];
+
+
+        if(args[0].equals("recording"))
+            return onRecording(subCommandArgs, sender);
 
         return false;
     }
 
-    private boolean onRecording() {
+    private boolean onRecording(String[] args, CommandSender sender) {
+        GreenStone.getPluginLogger().info("Subcommand 'recording' used");
+
+        if(args[0].equals("start")) {
+            GreenStone.getPluginLogger().info("Starting recording...");
+            Bukkit.broadcastMessage(Colors.YELLOW + sender.getName() + " is starting a recording...");
+        }
+
         return false;
     }
 }
