@@ -37,7 +37,7 @@ public class Commands implements CommandExecutor {
 
         if(args[0].equals("start")) {
             GreenStone.getPluginLogger().info("Starting recording...");
-            Bukkit.broadcastMessage(Colors.YELLOW + sender.getName() + " is starting a recording...");
+            Bukkit.broadcastMessage(Colors.YELLOW + sender.getName() + Colors.WHITE + " is starting a recording...");
         }
 
         return false;

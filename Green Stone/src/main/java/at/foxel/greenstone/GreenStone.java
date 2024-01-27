@@ -7,6 +7,15 @@ import java.util.logging.Logger;
 
 public final class GreenStone extends JavaPlugin {
     private static Logger logger;
+    private static boolean isRecording = false;
+
+    public static boolean isRecording() {
+        return isRecording;
+    }
+
+    public static void startRecording() {
+        GreenStone.isRecording = true;
+    }
 
     @Override
     public void onEnable() {
