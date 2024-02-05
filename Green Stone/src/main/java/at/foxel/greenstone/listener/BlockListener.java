@@ -38,6 +38,11 @@ public class BlockListener implements Listener {
     //Block place
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
+
+        if(event.getBlockPlaced().getType().equals(Material.FIRE))
+            return;
+
+
         Bukkit.broadcastMessage("A block has been placed");
     }
 
