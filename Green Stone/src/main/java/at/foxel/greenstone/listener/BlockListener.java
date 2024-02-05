@@ -9,6 +9,8 @@ import org.bukkit.event.block.BlockFormEvent;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
+import org.bukkit.event.player.PlayerBucketFillEvent;
 
 public class BlockListener implements Listener {
 
@@ -25,10 +27,20 @@ public class BlockListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void onBucketFill(PlayerBucketFillEvent event) {
+        Bukkit.broadcastMessage("A liquid has been taken back");
+    }
+
     //Block place
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Bukkit.broadcastMessage("A block has been placed");
+    }
+
+    @EventHandler
+    public void onBucketEmpty(PlayerBucketEmptyEvent event) {
+        Bukkit.broadcastMessage("A liquid has been placed");
     }
 
     //Block Swap (Liquid over snow for example)
