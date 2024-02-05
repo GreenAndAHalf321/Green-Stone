@@ -1,2 +1,4 @@
 at\foxel\greenstone\commands\Commands.class
+at\foxel\greenstone\listener\BlockListener.class
 at\foxel\greenstone\useful\Colors.class
+at\foxel\greenstone\GreenStone.class

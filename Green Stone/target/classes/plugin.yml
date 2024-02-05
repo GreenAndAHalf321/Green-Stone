@@ -2,3 +2,10 @@ name: Green_Stone
 version: '0.1'
 main: at.foxel.greenstone.GreenStone
 api-version: '1.20'
+commands:
+  gs:
+    description: Your description
+    usage: /gs [recording|playback] [start|pause|resume|stop]
+    aliases: [ greenstone, timestone ]
+    permission: greenstone.controltime
+    permission-message: You are not worthy to use the time stone
