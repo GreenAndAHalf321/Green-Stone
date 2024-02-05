@@ -1,6 +1,7 @@
 package at.foxel.greenstone.listener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -59,6 +60,11 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onBlockForm(BlockFormEvent event) {
         Bukkit.broadcastMessage("A block is spreading");
+    }
+
+    @EventHandler
+    public void onIgnite(BlockIgniteEvent event) {
+        Bukkit.broadcastMessage("A block ignited");
     }
 
 }
