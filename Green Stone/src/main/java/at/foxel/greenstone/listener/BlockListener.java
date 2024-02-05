@@ -5,6 +5,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockFormEvent;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
@@ -38,6 +39,12 @@ public class BlockListener implements Listener {
         } else {
             Bukkit.broadcastMessage("A liquid is spreading and destroyed a block");
         }
+    }
+
+    //Block spread (snow for example)
+    @EventHandler
+    public void onBlockForm(BlockFormEvent event) {
+        Bukkit.broadcastMessage("A block is spreading");
     }
 
 }
