@@ -5,6 +5,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
@@ -27,6 +28,16 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Bukkit.broadcastMessage("A block has been placed");
+    }
+
+    //Block Swap (Liquid over snow for example)
+    @EventHandler
+    public void onBlockFromTo(BlockFromToEvent event) {
+        if(event.getToBlock().getType().isAir()) {
+            Bukkit.broadcastMessage("A liquid is spreading");
+        } else {
+            Bukkit.broadcastMessage("A liquid is spreading and destroyed a block");
+        }
     }
 
 }
