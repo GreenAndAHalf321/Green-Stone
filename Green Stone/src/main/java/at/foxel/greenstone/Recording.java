@@ -11,13 +11,14 @@ import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Recording {
+    private static Recording currentRecording;
     private final Queue<BlockState> blockUpdates = new ConcurrentLinkedQueue<>();
     private final LinkedList<WorldState> worldStates = new LinkedList<>();
     private final String name;
 
     private final int timeIntervalInMilliseconds;
 
-    private Timer timer = new Timer();
+    private Timer timer;
     private TimerTask task = new TimerTask() {
         @Override
         public void run() {
@@ -36,6 +37,31 @@ public class Recording {
         this.timeIntervalInMilliseconds = timeIntervalInMilliseconds;
     }
 
+    public void startRecording() {
+        currentRecording = this;
+        timer = new Timer();
+        timer.schedule(task, timeIntervalInMilliseconds, timeIntervalInMilliseconds);
+    }
+
+    public void pauseRecording() {
+        timer.cancel();
+    }
+
+    public void resumeRecording() {
+        timer.cancel();
+        timer = new Timer();
+
+        timer.schedule(task, timeIntervalInMilliseconds, timeIntervalInMilliseconds);
+    }
+
+    public void stopRecording() {
+        timer.cancel();
+        timer = null;
+
+        currentRecording = null;
+        //TODO Save the recording
+    }
+
     public void addBlock(Block block) {
         blockUpdates.add(new BlockState(block.getType(), block.getLocation()));
     }
@@ -46,6 +72,10 @@ public class Recording {
 
     public LinkedList<WorldState> getWorldStates() {
         return (LinkedList<WorldState>) worldStates.clone();
+    }
+
+    public static Recording getCurrentRecording() {
+        return currentRecording;
     }
 
     public String getName() {
