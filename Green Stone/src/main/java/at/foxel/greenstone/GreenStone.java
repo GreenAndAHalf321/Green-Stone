@@ -2,6 +2,7 @@ package at.foxel.greenstone;
 
 import at.foxel.greenstone.commands.Commands;
 import at.foxel.greenstone.listener.BlockListener;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -23,14 +24,12 @@ public final class GreenStone extends JavaPlugin {
         logger = getLogger();
         logger.info("You have been given the time stone. Use it wisely!!");
 
-        try {
-            this.getCommand("gs").setExecutor(new Commands());
+        PluginCommand command = this.getCommand("gs");
 
-            this.getServer().getPluginManager().registerEvents(new BlockListener(), this);
-        } catch (NullPointerException e) {
-            logger.warning("Could not load commands");
-            getServer().getPluginManager().disablePlugin(this);
-        }
+        if(command != null)
+            command.setExecutor(new Commands());
+
+        this.getServer().getPluginManager().registerEvents(new BlockListener(), this);
     }
 
     @Override
