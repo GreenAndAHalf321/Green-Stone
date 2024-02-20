@@ -37,6 +37,10 @@ public class Recording {
         this.timeIntervalInMilliseconds = timeIntervalInMilliseconds;
     }
 
+    public static boolean isRecording() {
+        return currentRecording != null;
+    }
+
     public void startRecording() {
         currentRecording = this;
         timer = new Timer();
