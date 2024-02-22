@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Recording {
+    private static int count = 0;
     private static Recording currentRecording;
     private final Queue<BlockState> blockUpdates = new ConcurrentLinkedQueue<>();
     private final LinkedList<WorldState> worldStates = new LinkedList<>();
@@ -33,6 +34,7 @@ public class Recording {
     };
 
     public Recording(String name, int timeIntervalInMilliseconds) {
+        count++;
         this.name = name;
         this.timeIntervalInMilliseconds = timeIntervalInMilliseconds;
     }
@@ -84,5 +86,9 @@ public class Recording {
 
     public String getName() {
         return name;
+    }
+
+    public static int getCount() {
+        return count;
     }
 }
