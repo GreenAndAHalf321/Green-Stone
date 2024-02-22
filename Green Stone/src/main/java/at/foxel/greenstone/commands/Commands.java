@@ -1,6 +1,7 @@
 package at.foxel.greenstone.commands;
 
 import at.foxel.greenstone.GreenStone;
+import at.foxel.greenstone.Recording;
 import at.foxel.greenstone.useful.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
@@ -36,6 +37,30 @@ public class Commands implements CommandExecutor {
         if(args[0].equals("start")) {
             GreenStone.getPluginLogger().info("Starting recording...");
             Bukkit.broadcastMessage(Colors.YELLOW + sender.getName() + Colors.WHITE + " is starting a recording...");
+
+            String name;
+
+            if(args.length > 2)
+                name = args[1];
+            else
+                name = "Recording #" + Recording.getCount();
+
+            int interval;
+
+            if(args.length > 3)
+                interval = Integer.parseInt(args[2]);
+            else
+                interval = 1000;
+
+            if(args.length > 4)
+                if(Boolean.parseBoolean(args[3]))
+                    Bukkit.broadcastMessage(Colors.RED + "Recording players is not possible yet");
+
+            Recording rec = new Recording(name, interval);
+            rec.startRecording();
+
+            Bukkit.broadcastMessage(Colors.GREEN + "A recording named " + Colors.YELLOW + name + Colors.GREEN
+            + " with an interval of " + Colors.YELLOW + interval + Colors.GREEN + " has been started...");
         }
 
         return false;
