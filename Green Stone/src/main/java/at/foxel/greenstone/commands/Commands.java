@@ -22,9 +22,7 @@ public class Commands implements CommandExecutor {
 
         String[] subCommandArgs = new String[args.length - 1];
 
-        for(int i = 1; i < args.length; i++)
-            subCommandArgs[i - 1] = args[i];
-
+        System.arraycopy(args, 1, subCommandArgs, 0, args.length - 1);
 
         if(args[0].equals("recording"))
             return onRecording(subCommandArgs, sender);
