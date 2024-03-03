@@ -1,3 +1,4 @@
+at\foxel\greenstone\Playback$1.class
 at\foxel\greenstone\commands\Commands.class
 at\foxel\greenstone\WorldState.class
 at\foxel\greenstone\listener\BlockListener.class
@@ -6,3 +7,4 @@ at\foxel\greenstone\useful\Colors.class
 at\foxel\greenstone\Recording$1.class
 at\foxel\greenstone\BlockState.class
 at\foxel\greenstone\GreenStone.class
+at\foxel\greenstone\Playback.class

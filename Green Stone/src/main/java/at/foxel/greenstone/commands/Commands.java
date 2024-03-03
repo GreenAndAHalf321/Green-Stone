@@ -1,6 +1,7 @@
 package at.foxel.greenstone.commands;
 
 import at.foxel.greenstone.GreenStone;
+import at.foxel.greenstone.Playback;
 import at.foxel.greenstone.Recording;
 import at.foxel.greenstone.useful.Colors;
 import org.bukkit.Bukkit;
@@ -27,6 +28,9 @@ public class Commands implements CommandExecutor {
 
         if(args[0].equals("recording"))
             return onRecording(subCommandArgs, sender);
+
+        if(args[0].equals("playback"))
+            return onPlayback(subCommandArgs, sender);
 
         return false;
     }
@@ -63,6 +67,24 @@ public class Commands implements CommandExecutor {
             + " with an interval of " + Colors.YELLOW + interval + Colors.GREEN + " has been started...");
             return true;
         }
+
+        if(args[0].equals("stop")) {
+            GreenStone.getPluginLogger().info("Stopping recording...");
+            Bukkit.broadcastMessage(Colors.YELLOW + sender.getName() + Colors.WHITE + " is stopping a recording...");
+
+            Recording.getCurrentRecording().stopRecording();
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean onPlayback(String[] args, CommandSender sender) {
+        GreenStone.getPluginLogger().info("Subcommand 'playback' used");
+
+        if(args[0].equals("start")) {
+            Playback.startPlayback(Recording.getFinishedRecordings().getFirst());
+            return true;
         }
 
         return false;
