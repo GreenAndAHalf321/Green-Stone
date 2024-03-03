@@ -15,6 +15,7 @@ public class Recording {
     private static Recording currentRecording;
     private final Queue<BlockState> blockUpdates = new ConcurrentLinkedQueue<>();
     private final LinkedList<WorldState> worldStates = new LinkedList<>();
+    private static final LinkedList<Recording> finishedRecordings = new LinkedList<>();
     private final String name;
 
     private final int timeIntervalInMilliseconds;
@@ -64,6 +65,8 @@ public class Recording {
         timer.cancel();
         timer = null;
 
+        finishedRecordings.add(currentRecording);
+
         currentRecording = null;
         //TODO Save the recording
     }
@@ -78,6 +81,10 @@ public class Recording {
 
     public LinkedList<WorldState> getWorldStates() {
         return (LinkedList<WorldState>) worldStates.clone();
+    }
+
+    public static LinkedList<Recording> getFinishedRecordings() {
+        return (LinkedList<Recording>) finishedRecordings.clone();
     }
 
     public static Recording getCurrentRecording() {
