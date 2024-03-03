@@ -61,6 +61,8 @@ public class Commands implements CommandExecutor {
 
             Bukkit.broadcastMessage(Colors.GREEN + "A recording named " + Colors.YELLOW + name + Colors.GREEN
             + " with an interval of " + Colors.YELLOW + interval + Colors.GREEN + " has been started...");
+            return true;
+        }
         }
 
         return false;
