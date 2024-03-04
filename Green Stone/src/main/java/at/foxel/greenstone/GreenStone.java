@@ -34,16 +34,15 @@ public final class GreenStone extends JavaPlugin {
         logger.info("The time stone has been taken from you! Sorry not sorry.");
     }
 
-    public static Logger getPluginLogger() {
-        return logger;
+    public static void startRecording() {
+        GreenStone.isRecording = true;
     }
 
     public static boolean isRecording() {
         return isRecording;
     }
-
-    public static void startRecording() {
-        GreenStone.isRecording = true;
-    }
     public static GreenStone getPlugin() { return plugin; }
+    public static Logger getPluginLogger() {
+        return logger;
+    }
 }
