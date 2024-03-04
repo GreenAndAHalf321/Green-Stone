@@ -14,15 +14,6 @@ public final class GreenStone extends JavaPlugin {
     private static boolean isRecording = false;
     private static GreenStone plugin;
 
-    public static boolean isRecording() {
-        return isRecording;
-    }
-
-    public static void startRecording() {
-        GreenStone.isRecording = true;
-    }
-    public static GreenStone getPlugin() { return plugin; }
-
     @Override
     public void onEnable() {
         logger = getLogger();
@@ -46,4 +37,13 @@ public final class GreenStone extends JavaPlugin {
     public static Logger getPluginLogger() {
         return logger;
     }
+
+    public static boolean isRecording() {
+        return isRecording;
+    }
+
+    public static void startRecording() {
+        GreenStone.isRecording = true;
+    }
+    public static GreenStone getPlugin() { return plugin; }
 }
