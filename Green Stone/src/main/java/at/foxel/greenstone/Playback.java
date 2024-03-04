@@ -25,7 +25,7 @@ public class Playback {
     private static void recreateWorldState(WorldState state) {
         for (BlockState blockState : state.getBlockStates()) {
 
-            GreenStone.getPlugin().getServer().getScheduler().callSyncMethod(GreenStone.getPlugin(), () -> {
+            GreenStone.getPlugin().scheduleSyncCallable(() -> {
                 blockState.getLocation().getBlock().setType(blockState.getMaterial());
                 return null;
             });
