@@ -2,26 +2,17 @@ package at.foxel.greenstone;
 
 import at.foxel.greenstone.commands.Commands;
 import at.foxel.greenstone.listener.BlockListener;
-import org.bukkit.Server;
+import jdk.vm.ci.code.site.Call;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
 public final class GreenStone extends JavaPlugin {
     private static Logger logger;
     private static boolean isRecording = false;
     private static GreenStone plugin;
-
-    public static boolean isRecording() {
-        return isRecording;
-    }
-
-    public static void startRecording() {
-        GreenStone.isRecording = true;
-    }
-    public static GreenStone getPlugin() { return plugin; }
 
     @Override
     public void onEnable() {
@@ -43,6 +34,18 @@ public final class GreenStone extends JavaPlugin {
         logger.info("The time stone has been taken from you! Sorry not sorry.");
     }
 
+    public void scheduleSyncCallable(Callable<Object> callable) {
+        getServer().getScheduler().callSyncMethod(this, callable);
+    }
+
+    public static void startRecording() {
+        GreenStone.isRecording = true;
+    }
+
+    public static boolean isRecording() {
+        return isRecording;
+    }
+    public static GreenStone getPlugin() { return plugin; }
     public static Logger getPluginLogger() {
         return logger;
     }
