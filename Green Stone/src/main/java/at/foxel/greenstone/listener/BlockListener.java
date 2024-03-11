@@ -34,14 +34,14 @@ public class BlockListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void onBucketFill(PlayerBucketFillEvent event) {
-        if(!Recording.isRecording())
-            return;
-
-        Recording.getCurrentRecording().removeBlock(event.getBlock().getLocation());
-        Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-liquid has been taken back");
-    }
+//    @EventHandler
+//    public void onBucketFill(PlayerBucketFillEvent event) {
+//        if(!Recording.isRecording())
+//            return;
+//
+//        Recording.getCurrentRecording().removeBlock(event.getBlock().getLocation());
+//        Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-liquid has been taken back");
+//    }
 
     @EventHandler
     public void onBlockFade(BlockFadeEvent event) {
@@ -70,15 +70,15 @@ public class BlockListener implements Listener {
         Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-block has been placed");
     }
 
-    @EventHandler
-    public void onBucketEmpty(PlayerBucketEmptyEvent event) {
-        if(!Recording.isRecording())
-            return;
-
-        Recording.getCurrentRecording().addBlock(event.getBlock());
-
-        Bukkit.broadcastMessage("A " + event.getBucket() + "-liquid has been placed"); //Not getting the liquid but the buket with the liquid
-    }
+//    @EventHandler
+//    public void onBucketEmpty(PlayerBucketEmptyEvent event) {
+//        if(!Recording.isRecording())
+//            return;
+//
+//        Recording.getCurrentRecording().addBlock(event.getBlock());
+//
+//        Bukkit.broadcastMessage("A " + event.getBucket() + "-liquid has been placed"); //Not getting the liquid but the buket with the liquid
+//    }
 
     //Block Swap (Liquid over snow for example)
     @EventHandler
@@ -89,9 +89,9 @@ public class BlockListener implements Listener {
         Recording.getCurrentRecording().addBlock(event.getBlock());
 
         if(event.getToBlock().getType().isAir()) {
-            Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-liquid is spreading");
+//            Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-liquid is spreading");
         } else {
-            Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-liquid is spreading and destroyed a " + event.getToBlock().getType() + "-block");
+//            Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-liquid is spreading and destroyed a " + event.getToBlock().getType() + "-block");
         }
     }
 
@@ -106,14 +106,14 @@ public class BlockListener implements Listener {
         Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-block is spreading");
     }
 
-    @EventHandler
-    public void onIgnite(BlockIgniteEvent event) {
-        if(!Recording.isRecording())
-            return;
-
-        Recording.getCurrentRecording().addBlock(event.getBlock());
-
-        Bukkit.broadcastMessage("A " + event.getIgnitingBlock().getType() + "-block ignited");
-    }
+//    @EventHandler
+//    public void onIgnite(BlockIgniteEvent event) {
+//        if(!Recording.isRecording())
+//            return;
+//
+//        Recording.getCurrentRecording().addBlock(event.getBlock());
+//
+//        Bukkit.broadcastMessage("A " + event.getIgnitingBlock().getType() + "-block ignited");
+//    }
 
 }
