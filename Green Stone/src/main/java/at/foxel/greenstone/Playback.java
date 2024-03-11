@@ -26,7 +26,7 @@ public class Playback {
         for (BlockState blockState : state.getBlockStates()) {
 
             GreenStone.getPlugin().scheduleSyncCallable(() -> {
-                blockState.getLocation().getBlock().setType(blockState.getMaterial());
+                blockState.getLocation().getBlock().setType(blockState.getMaterialFrom());
                 return null;
             });
         }

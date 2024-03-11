@@ -4,16 +4,18 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 public class BlockState {
-    private final Material material;
+    private final Material materialFrom;
+    private final Material materialTo;
     private final Location location;
 
-    public BlockState(Material material, Location location) {
-        this.material = material;
+    public BlockState(Material materialFrom, Material materialTo, Location location) {
+        this.materialFrom = materialFrom;
+        this.materialTo = materialTo;
         this.location = location;
     }
 
-    public Material getMaterial() {
-        return material;
+    public Material getMaterialFrom() {
+        return materialFrom;
     }
 
     public Location getLocation() {

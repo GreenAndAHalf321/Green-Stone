@@ -72,11 +72,12 @@ public class Recording {
     }
 
     public void addBlock(Block block) {
-        blockUpdates.add(new BlockState(block.getType(), block.getLocation()));
+        //TODO in case a block is placed inside a liquid the FROM block is not AIR
+        blockUpdates.add(new BlockState(Material.AIR, block.getType(), block.getLocation()));
     }
 
-    public void removeBlock(Location location) {
-        blockUpdates.add(new BlockState(Material.AIR, location));
+    public void removeBlock(Block removedBlock) {
+        blockUpdates.add(new BlockState(removedBlock.getType(), Material.AIR, removedBlock.getLocation()));
     }
 
     public LinkedList<WorldState> getWorldStates() {

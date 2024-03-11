@@ -19,7 +19,7 @@ public class BlockListener implements Listener {
         if(!Recording.isRecording())
             return;
 
-        Recording.getCurrentRecording().removeBlock(event.getBlock().getLocation());
+        Recording.getCurrentRecording().removeBlock(event.getBlock());
         Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-block has been destroyed");
     }
 
@@ -29,7 +29,7 @@ public class BlockListener implements Listener {
             return;
 
         for (Block block : event.blockList()) {
-            Recording.getCurrentRecording().removeBlock(block.getLocation());
+            Recording.getCurrentRecording().removeBlock(block);
             Bukkit.broadcastMessage("A " + block.getType() + "-block has been destroyed by an explosion");
         }
     }
@@ -49,7 +49,7 @@ public class BlockListener implements Listener {
             return;
 
         if(event.getBlock().getType().isAir())
-            Recording.getCurrentRecording().removeBlock(event.getBlock().getLocation());
+            Recording.getCurrentRecording().removeBlock(event.getBlock());
         else
             Recording.getCurrentRecording().addBlock(event.getBlock());
 
