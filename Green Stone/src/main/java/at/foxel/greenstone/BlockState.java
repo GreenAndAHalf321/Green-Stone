@@ -17,8 +17,12 @@ public class BlockState {
     public Material getMaterialFrom() {
         return materialFrom;
     }
+    public Material getMaterialTo() {
+        return materialTo;
+    }
 
     public Location getLocation() {
         return location;
     }
+
 }
