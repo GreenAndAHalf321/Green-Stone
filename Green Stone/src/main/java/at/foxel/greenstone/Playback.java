@@ -10,7 +10,7 @@ public class Playback {
     private static TimerTask task = new TimerTask() {
         @Override
         public void run() {
-            recreateWorldState(recordingToPlayBack.getWorldStates().get(index));
+            recreateWorldState(recordingToPlayBack.getWorldStates().getItemByIndex(index));
             index++;
         }
     };

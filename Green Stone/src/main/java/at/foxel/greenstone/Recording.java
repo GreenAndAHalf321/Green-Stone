@@ -1,6 +1,6 @@
 package at.foxel.greenstone;
 
-import org.bukkit.Location;
+import at.foxel.greenstone.useful.DoubleLinkedList;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
@@ -14,7 +14,7 @@ public class Recording {
     private static int count = 0;
     private static Recording currentRecording;
     private final Queue<BlockState> blockUpdates = new ConcurrentLinkedQueue<>();
-    private final LinkedList<WorldState> worldStates = new LinkedList<>();
+    private final DoubleLinkedList<WorldState> worldStates = new DoubleLinkedList<>();
     private static final LinkedList<Recording> finishedRecordings = new LinkedList<>();
     private final String name;
 
@@ -30,7 +30,7 @@ public class Recording {
                 currentState = blockUpdates.poll();
                 worldState.addBlockState(currentState);
             }
-            worldStates.add(worldState);
+            worldStates.addLast(worldState);
         }
     };
 
@@ -80,8 +80,8 @@ public class Recording {
         blockUpdates.add(new BlockState(removedBlock.getType(), Material.AIR, removedBlock.getLocation()));
     }
 
-    public LinkedList<WorldState> getWorldStates() {
-        return (LinkedList<WorldState>) worldStates.clone();
+    public DoubleLinkedList<WorldState> getWorldStates() {
+        return worldStates;
     }
 
     public static LinkedList<Recording> getFinishedRecordings() {
