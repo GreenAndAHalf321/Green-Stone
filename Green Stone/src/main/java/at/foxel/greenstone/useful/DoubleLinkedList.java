@@ -16,7 +16,7 @@ public class DoubleLinkedList<T> {
         return tail;
     }
 
-    public void AddLast(T newItem) {
+    public void addLast(T newItem) {
 
         DoubleReferenceNode<T> itemToStore = new DoubleReferenceNode<>(newItem);
 
@@ -31,7 +31,7 @@ public class DoubleLinkedList<T> {
         count++;
     }
 
-    public void AddFirst(T newItem) {
+    public void addFirst(T newItem) {
 
         DoubleReferenceNode<T> itemToStore = new DoubleReferenceNode<>(newItem);
 
@@ -46,7 +46,7 @@ public class DoubleLinkedList<T> {
         count++;
     }
 
-    public void RemoveLast() {
+    public void removeLast() {
 
         if(count == 0)
             return;
@@ -57,7 +57,7 @@ public class DoubleLinkedList<T> {
         count--;
     }
 
-    public void RemoveFirst() {
+    public void removeFirst() {
 
         if(count == 0)
             return;
