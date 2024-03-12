@@ -24,6 +24,10 @@ public class Recording {
     private TimerTask task = new TimerTask() {
         @Override
         public void run() {
+            //TODO make this optional
+            if(blockUpdates.isEmpty())
+                return;
+
             BlockState currentState;
             WorldState worldState = new WorldState();
             while (!blockUpdates.isEmpty()) {
