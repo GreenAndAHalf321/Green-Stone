@@ -83,8 +83,39 @@ public class Commands implements CommandExecutor {
         GreenStone.getPluginLogger().info("Subcommand 'playback' used");
 
         if(args[0].equals("start")) {
-            Playback.startPlayback(Recording.getFinishedRecordings().getFirst());
-            return true;
+            GreenStone.getPluginLogger().info("A player is trying to start a playback");
+
+            if(args.length < 2) {
+                GreenStone.getPluginLogger().info("The player has not specified a recording name he wants to play back");
+
+                sender.sendMessage(Colors.RED + "You have to specify a recording name");
+
+                return false;
+            }
+
+            StringBuilder buffer = new StringBuilder();
+
+            for(int i = 0; i < args.length - 1; i++) {
+                if(i != 0)
+                    buffer.append(" ");
+
+                buffer.append(args[i + 1]);
+            }
+
+            String playbackName = buffer.toString();
+            for(Recording rec : Recording.getFinishedRecordings())
+                if(rec.getName().equals(playbackName)) {
+                    Playback.startPlayback(rec);
+
+                    GreenStone.getPluginLogger().info("Recording found. Starting playback..");
+                    return true;
+                }
+
+            GreenStone.getPluginLogger().info("No recording with the specified name found");
+            sender.sendMessage(Colors.RED + "No recording with the name " + Colors.YELLOW + playbackName
+                    + Colors.RED + " could be found");
+
+            return false;
         }
 
         return false;
