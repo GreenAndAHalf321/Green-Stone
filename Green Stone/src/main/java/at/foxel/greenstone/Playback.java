@@ -14,8 +14,10 @@ public class Playback {
         public void run() {
             recreateWorldState(currentWorldState.item);
 
-            if(currentWorldState.next == null)
+            if(currentWorldState.next == null) {
+                recordingToPlayBack = null;
                 timer.cancel();
+            }
 
             currentWorldState = currentWorldState.next;
         }
