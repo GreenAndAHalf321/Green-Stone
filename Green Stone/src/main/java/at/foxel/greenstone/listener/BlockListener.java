@@ -17,7 +17,7 @@ public class BlockListener implements Listener {
     //Block break
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if(!Recording.isRecording())
+        if (!Recording.isRecording())
             return;
 
         Recording.getCurrentRecording().removeBlock(event.getBlock());
@@ -26,7 +26,7 @@ public class BlockListener implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-        if(!Recording.isRecording())
+        if (!Recording.isRecording())
             return;
 
         for (Block block : event.blockList()) {
@@ -46,24 +46,25 @@ public class BlockListener implements Listener {
 
     @EventHandler
     public void onBlockFade(BlockFadeEvent event) {
-        if(!Recording.isRecording())
+        if (!Recording.isRecording())
             return;
 
-        if(event.getBlock().getType().isAir())
+        if (event.getBlock().getType().isAir())
             Recording.getCurrentRecording().removeBlock(event.getBlock());
         else
             Recording.getCurrentRecording().addBlock(event.getBlock());
 
-        GreenStone.getPluginLogger().info("A block was fading from " + event.getBlock().getType() + " to " + event.getNewState().getType());
+        GreenStone.getPluginLogger().info("A block was fading from " + event.getBlock().getType() + " to "
+                + event.getNewState().getType());
     }
 
     //Block place
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if(!Recording.isRecording())
+        if (!Recording.isRecording())
             return;
 
-        if(event.getBlockPlaced().getType().equals(Material.FIRE))
+        if (event.getBlockPlaced().getType().equals(Material.FIRE))
             return;
 
         Recording.getCurrentRecording().addBlock(event.getBlock());
@@ -84,12 +85,12 @@ public class BlockListener implements Listener {
     //Block Swap (Liquid over snow for example)
     @EventHandler
     public void onBlockFromTo(BlockFromToEvent event) {
-        if(!Recording.isRecording())
+        if (!Recording.isRecording())
             return;
 
         Recording.getCurrentRecording().addBlock(event.getBlock());
 
-        if(event.getToBlock().getType().isAir()) {
+        if (event.getToBlock().getType().isAir()) {
 //            Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-liquid is spreading");
         } else {
 //            Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-liquid is spreading and destroyed a " + event.getToBlock().getType() + "-block");
@@ -99,7 +100,7 @@ public class BlockListener implements Listener {
     //Block spread (snow for example)
     @EventHandler
     public void onBlockForm(BlockFormEvent event) {
-        if(!Recording.isRecording())
+        if (!Recording.isRecording())
             return;
 
         Recording.getCurrentRecording().addBlock(event.getBlock());
