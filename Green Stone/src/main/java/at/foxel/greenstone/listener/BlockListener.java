@@ -1,5 +1,6 @@
 package at.foxel.greenstone.listener;
 
+import at.foxel.greenstone.GreenStone;
 import at.foxel.greenstone.Recording;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -20,7 +21,7 @@ public class BlockListener implements Listener {
             return;
 
         Recording.getCurrentRecording().removeBlock(event.getBlock());
-        Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-block has been destroyed");
+        GreenStone.getPluginLogger().info("A " + event.getBlock().getType() + "-block has been destroyed");
     }
 
     @EventHandler
@@ -30,7 +31,7 @@ public class BlockListener implements Listener {
 
         for (Block block : event.blockList()) {
             Recording.getCurrentRecording().removeBlock(block);
-            Bukkit.broadcastMessage("A " + block.getType() + "-block has been destroyed by an explosion");
+            GreenStone.getPluginLogger().info("A " + block.getType() + "-block has been destroyed by an explosion");
         }
     }
 
@@ -53,7 +54,7 @@ public class BlockListener implements Listener {
         else
             Recording.getCurrentRecording().addBlock(event.getBlock());
 
-        Bukkit.broadcastMessage("A block was fading from " + event.getBlock().getType() + " to " + event.getNewState().getType());
+        GreenStone.getPluginLogger().info("A block was fading from " + event.getBlock().getType() + " to " + event.getNewState().getType());
     }
 
     //Block place
@@ -67,7 +68,7 @@ public class BlockListener implements Listener {
 
         Recording.getCurrentRecording().addBlock(event.getBlock());
 
-        Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-block has been placed");
+        GreenStone.getPluginLogger().info("A " + event.getBlock().getType() + "-block has been placed");
     }
 
 //    @EventHandler
@@ -103,7 +104,7 @@ public class BlockListener implements Listener {
 
         Recording.getCurrentRecording().addBlock(event.getBlock());
 
-        Bukkit.broadcastMessage("A " + event.getBlock().getType() + "-block is spreading");
+        GreenStone.getPluginLogger().info("A " + event.getBlock().getType() + "-block is spreading");
     }
 
 //    @EventHandler
