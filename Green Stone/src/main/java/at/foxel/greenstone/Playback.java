@@ -7,6 +7,8 @@ public class Playback {
     private static Recording recordingToPlayBack;
     private static DoubleReferenceNode<WorldState> currentWorldState;
 
+    private static int currentPlaybackId;
+
     public static void startPlayback(Recording recording) {
         recordingToPlayBack = recording;
 
@@ -18,14 +20,14 @@ public class Playback {
         }
         resetWorldState(currentWorldState.item);
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(GreenStone.getPlugin(), () -> {
+        currentPlaybackId = Bukkit.getScheduler().scheduleSyncRepeatingTask(GreenStone.getPlugin(), () -> {
             recreateWorldState(currentWorldState.item);
 
             if(currentWorldState.next == null)
-                Bukkit.getScheduler().cancelTasks(GreenStone.getPlugin());
+                Bukkit.getScheduler().cancelTask(currentPlaybackId);
 
             currentWorldState = currentWorldState.next;
-        }, 0, 1000);
+        }, 0, 20);
     }
 
     private static void recreateWorldState(WorldState state) {
