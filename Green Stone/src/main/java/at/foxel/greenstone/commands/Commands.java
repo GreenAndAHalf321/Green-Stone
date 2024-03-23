@@ -114,8 +114,6 @@ public class Commands implements CommandExecutor {
             GreenStone.getPluginLogger().info("No recording with the specified name found");
             sender.sendMessage(Colors.RED + "No recording with the name " + Colors.YELLOW + playbackName
                     + Colors.RED + " could be found");
-
-            return false;
         }
 
         return false;
