@@ -1,27 +1,11 @@
 package at.foxel.greenstone;
 
 import at.foxel.greenstone.useful.DoubleReferenceNode;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import org.bukkit.Bukkit;
 
 public class Playback {
     private static Recording recordingToPlayBack;
     private static DoubleReferenceNode<WorldState> currentWorldState;
-    private static Timer timer;
-    private static TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            recreateWorldState(currentWorldState.item);
-
-            if(currentWorldState.next == null) {
-                recordingToPlayBack = null;
-                timer.cancel();
-            }
-
-            currentWorldState = currentWorldState.next;
-        }
-    };
 
     public static void startPlayback(Recording recording) {
         recordingToPlayBack = recording;
@@ -34,8 +18,14 @@ public class Playback {
         }
         resetWorldState(currentWorldState.item);
 
-        timer = new Timer();
-        timer.scheduleAtFixedRate(task, 0, 1000);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(GreenStone.getPlugin(), () -> {
+            recreateWorldState(currentWorldState.item);
+
+            if(currentWorldState.next == null)
+                Bukkit.getScheduler().cancelTasks(GreenStone.getPlugin());
+
+            currentWorldState = currentWorldState.next;
+        }, 0, 1000);
     }
 
     private static void recreateWorldState(WorldState state) {
