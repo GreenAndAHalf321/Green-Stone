@@ -6,7 +6,7 @@
 
     <groupId>at.foxel</groupId>
     <artifactId>GreenStone</artifactId>
-    <version>0.0.1 pre-alpha</version>
+    <version>0.0.2 pre-alpha</version>
     <packaging>jar</packaging>
 
     <name>Green Stone</name>
