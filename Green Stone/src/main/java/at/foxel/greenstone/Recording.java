@@ -21,7 +21,7 @@ public class Recording {
     private final int timeIntervalInMilliseconds;
 
     private Timer timer;
-    private TimerTask task = new TimerTask() {
+    private final TimerTask task = new TimerTask() {
         @Override
         public void run() {
             //TODO make this optional
