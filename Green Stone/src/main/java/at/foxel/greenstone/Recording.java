@@ -4,6 +4,8 @@ import at.foxel.greenstone.useful.DoubleLinkedList;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Timer;
@@ -72,7 +74,8 @@ public class Recording {
         finishedRecordings.add(currentRecording);
 
         currentRecording = null;
-        //TODO Save the recording
+
+        saveRecording();
     }
 
     public void addBlock(Block block) {
@@ -102,5 +105,19 @@ public class Recording {
 
     public static int getCount() {
         return count;
+    }
+
+    private void saveRecording() {
+        File recordingFile = new File(name + ".rec");
+
+        try{
+            if (recordingFile.createNewFile()) {
+                GreenStone.getPluginLogger().info("The recording was saved");
+            }else {
+                GreenStone.getPluginLogger().info("The recording could not be saved");
+            }
+        }catch (IOException ex) {
+            GreenStone.getPluginLogger().info("The recording could not be saved");
+        }
     }
 }

@@ -1,5 +1,5 @@
 name: Green_Stone
-version: '0.0.2 pre-alpha'
+version: '0.1.0 pre-alpha'
 main: at.foxel.greenstone.GreenStone
 api-version: '1.20'
 commands:
