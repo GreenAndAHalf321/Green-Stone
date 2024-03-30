@@ -6,6 +6,9 @@ import org.bukkit.block.Block;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Timer;
@@ -108,13 +111,19 @@ public class Recording {
     }
 
     private void saveRecording() {
-        File recordingFile = new File(name + ".rec");
 
         try{
+            Path path = Paths.get("plugins\\Recordings");
+
+            if(!Files.exists(path))
+                Files.createDirectory(path);
+
+            File recordingFile = new File(path  + "\\" + name + ".rec");
+
             if (recordingFile.createNewFile()) {
                 GreenStone.getPluginLogger().info("The recording was saved");
             }else {
-                GreenStone.getPluginLogger().info("The recording could not be saved");
+                GreenStone.getPluginLogger().info("The recording could not be saved because it already exists");
             }
         }catch (IOException ex) {
             GreenStone.getPluginLogger().info("The recording could not be saved");
