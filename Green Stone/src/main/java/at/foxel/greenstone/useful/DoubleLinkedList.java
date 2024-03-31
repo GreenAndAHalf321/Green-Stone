@@ -1,6 +1,8 @@
 package at.foxel.greenstone.useful;
 
-public class DoubleLinkedList<T> {
+import java.util.Iterator;
+
+public class DoubleLinkedList<T> implements Iterable<T>{
     private int count = 0;
     private DoubleReferenceNode<T> head;
     private DoubleReferenceNode<T> tail;
@@ -95,5 +97,28 @@ public class DoubleLinkedList<T> {
     }
     public int getCount() {
         return count;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private DoubleReferenceNode<T> current = null;
+            @Override
+            public boolean hasNext() {
+                if (current == null)
+                    return  true;
+                return !current.equals(tail);
+            }
+
+            @Override
+            public T next() {
+                if(current == null)
+                    current = head;
+                else
+                    current = current.next;
+
+                return current.item;
+            }
+        };
     }
 }
