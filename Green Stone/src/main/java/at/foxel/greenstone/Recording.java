@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -118,13 +119,8 @@ public class Recording {
             if(!Files.exists(path))
                 Files.createDirectory(path);
 
-            File recordingFile = new File(path  + "\\" + name + ".rec");
+            FileWriter writer = new FileWriter(path + "\\" + name + ".gsrec");
 
-            if (recordingFile.createNewFile()) {
-                GreenStone.getPluginLogger().info("The recording was saved");
-            }else {
-                GreenStone.getPluginLogger().info("The recording could not be saved because it already exists");
-            }
         }catch (IOException ex) {
             GreenStone.getPluginLogger().info("The recording could not be saved");
         }
