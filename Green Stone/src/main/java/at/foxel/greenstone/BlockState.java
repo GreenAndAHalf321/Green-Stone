@@ -25,4 +25,17 @@ public class BlockState {
         return location;
     }
 
+    @Override
+    public String toString() {
+        return materialFrom.toString() +
+                ';' +
+                materialTo +
+                ";(" +
+                location.getX() +
+                ';' +
+                location.getY() +
+                ';' +
+                location.getZ() +
+                ')';
+    }
 }

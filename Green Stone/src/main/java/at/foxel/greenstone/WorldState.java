@@ -17,4 +17,14 @@ public class WorldState {
     public LinkedList<BlockState> getBlockStates() {
         return (LinkedList<BlockState>) blockStates.clone();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for(BlockState blockState : blockStates)
+            builder.append(blockState.toString()).append("\n");
+
+        return builder.toString();
+    }
 }

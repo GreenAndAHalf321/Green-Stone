@@ -1,6 +1,7 @@
 package at.foxel.greenstone;
 
 import at.foxel.greenstone.useful.DoubleLinkedList;
+import at.foxel.greenstone.useful.DoubleReferenceNode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
@@ -121,8 +122,23 @@ public class Recording {
 
             FileWriter writer = new FileWriter(path + "\\" + name + ".gsrec");
 
+            writer.write(this.toString());
+
+            writer.close();
+
         }catch (IOException ex) {
             GreenStone.getPluginLogger().info("The recording could not be saved");
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for(WorldState state : worldStates) {
+            builder.append(state.toString()).append("\n");
+        }
+
+        return builder.toString();
     }
 }
