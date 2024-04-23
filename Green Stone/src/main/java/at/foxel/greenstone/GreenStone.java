@@ -2,8 +2,8 @@ package at.foxel.greenstone;
 
 import at.foxel.greenstone.commands.Commands;
 import at.foxel.greenstone.listener.BlockListener;
-import jdk.vm.ci.code.site.Call;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.Callable;
@@ -13,6 +13,7 @@ public final class GreenStone extends JavaPlugin {
     private static Logger logger;
     private static boolean isRecording = false;
     private static GreenStone plugin;
+    public FileConfiguration config = getConfig();
 
     @Override
     public void onEnable() {
