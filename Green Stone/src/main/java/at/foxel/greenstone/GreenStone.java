@@ -27,6 +27,23 @@ public final class GreenStone extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new BlockListener(), this);
 
+
+        //Setup config file
+
+        //Command Execution
+        config.addDefault("allowExecutionViaPlayer", true);
+        config.addDefault("allowExecutionViaConsole", false);
+        config.addDefault("allowExecutionViaCommandBLock", false);
+
+        //Recording
+        config.addDefault("recordPlayer", false);
+        config.addDefault("recordEntities", false);
+        config.addDefault("recordGaps", false);
+        config.addDefault("defaultRecordingIntervalInMilliseconds", 1000);
+
+        config.options().copyDefaults(true);
+        saveConfig();
+
         plugin = this;
     }
 
