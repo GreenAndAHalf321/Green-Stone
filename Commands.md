@@ -6,18 +6,17 @@ A list of all commands implemented by this plugin. All commands start with **/gs
 
 The commands that start with **/gs recording** are used to start, pause, stop, rename or delete a recording or change the default recording settings.
 
-### start {name} {time interval} {record players}
+### start {name} {time interval} 
 
 The **start** command starts a recording. Once a recording is started every update in the world is saved in the given time interval. The updates are stored in a file saved on the server. The file name depends on the name provided in the command args. If record players is set to true the position of the players is also saved in the given time interval. 
 
 - *name* (optional; text) => The name of the recording and the file. If not specified the name will be "Recording #???".
 - *time interval* (optional; in milliseconds) => The time interval how often the world changes will be saved in milliseconds. If not specified the will be the default value. If you haven't changed it the default value is 1000 milliseconds (every second).
-- *record players* (optional; true or false) => Can be *<u>true</u>* or *<u>false</u>*. If true the position of all players is saved in the given time interval. IF it is false the players are ignored. If you haven't changed it the default value is **false**.
 
 > Here are a few Examples for this command. (For this examples we assume that the default values have not been changed):
 >
 > - **/gs recording start** => Starts a recording with a time interval of one second that ignores players and it will be saved under the name Recording #001
-> - **/gs recording start Tower_Timelaps 60000 true** => Starts a recording with a time interval of one minute that also saves the player position every minute and it will be saved under the name Tower_Timelaps
+> - **/gs recording start Tower_Timelaps 60000** => Starts a recording with a time interval of one minute and it will be saved under the name Tower_Timelaps
 
 ### pause {time}
 
