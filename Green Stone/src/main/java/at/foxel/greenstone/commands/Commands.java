@@ -5,7 +5,13 @@ import at.foxel.greenstone.Playback;
 import at.foxel.greenstone.Recording;
 import at.foxel.greenstone.useful.Colors;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.*;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class Commands implements CommandExecutor {
@@ -132,6 +138,18 @@ public class Commands implements CommandExecutor {
             sender.sendMessage(Colors.RED + "No recording with the name " + Colors.YELLOW + playbackName
                     + Colors.RED + " could be found");
         }
+
+        return false;
+    }
+
+    private boolean onPlaybacks(CommandSender sender) {
+        //TODO Make inventory size dynamic
+        Inventory playbacks = Bukkit.createInventory(null, 9*3, "Playbacks");
+
+        //TODO add playbacks to inventory
+        playbacks.addItem(new ItemStack(Material.DIAMOND, 10));
+
+        ((Player) sender).openInventory(playbacks);
 
         return false;
     }
