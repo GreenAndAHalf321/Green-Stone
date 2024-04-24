@@ -71,9 +71,11 @@ public class Commands implements CommandExecutor {
             else
                 interval = 1000;
 
-            if(args.length > 4)
-                if(Boolean.parseBoolean(args[3]))
-                    Bukkit.broadcastMessage(Colors.RED + "Recording players is not possible yet");
+            //TODO make players and entities recordable
+            if(GreenStone.getPlugin().config.getBoolean("recordPlayer"))
+                Bukkit.broadcastMessage(Colors.RED + "Recording players is not possible yet");
+            if(GreenStone.getPlugin().config.getBoolean("recordEntities"))
+                Bukkit.broadcastMessage(Colors.RED + "Recording entities is not possible yet");
 
             Recording rec = new Recording(name, interval);
             rec.startRecording();
