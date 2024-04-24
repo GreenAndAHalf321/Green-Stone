@@ -31,9 +31,9 @@ public class Recording {
     private final TimerTask task = new TimerTask() {
         @Override
         public void run() {
-            //TODO make this optional
             if(blockUpdates.isEmpty())
-                return;
+                if(GreenStone.getPlugin().config.getBoolean("recordGaps"))
+                    return;
 
             BlockState currentState;
             WorldState worldState = new WorldState();
