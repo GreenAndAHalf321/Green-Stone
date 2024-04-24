@@ -1,11 +1,9 @@
 package at.foxel.greenstone;
 
 import at.foxel.greenstone.useful.DoubleLinkedList;
-import at.foxel.greenstone.useful.DoubleReferenceNode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;

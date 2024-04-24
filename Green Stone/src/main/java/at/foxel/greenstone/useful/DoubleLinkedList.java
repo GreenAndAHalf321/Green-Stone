@@ -1,5 +1,7 @@
 package at.foxel.greenstone.useful;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Iterator;
 
 public class DoubleLinkedList<T> implements Iterable<T>{
@@ -100,7 +102,7 @@ public class DoubleLinkedList<T> implements Iterable<T>{
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public @NotNull Iterator<T> iterator() {
         return new Iterator<T>() {
             private DoubleReferenceNode<T> current = null;
             @Override

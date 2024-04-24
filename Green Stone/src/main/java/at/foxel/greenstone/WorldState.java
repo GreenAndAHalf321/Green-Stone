@@ -3,7 +3,7 @@ package at.foxel.greenstone;
 import java.util.LinkedList;
 
 public class WorldState {
-    private LinkedList<BlockState> blockStates = new LinkedList<>();
+    private final LinkedList<BlockState> blockStates = new LinkedList<>();
 
     public void addBlockState(BlockState state) {
 
