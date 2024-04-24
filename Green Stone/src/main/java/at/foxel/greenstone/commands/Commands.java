@@ -13,13 +13,28 @@ public class Commands implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         GreenStone.getPluginLogger().info("Command " + label + " used");
 
-        //TODO Add settings to allow or disallow execution via command block, console or player
         if(sender instanceof BlockCommandSender) {
             GreenStone.getPluginLogger().info("Executed by Command Block");
+            if(!GreenStone.getPlugin().config.getBoolean("allowExecutionViaCommandBLock")) {
+                GreenStone.getPluginLogger().info("Command Block execution not allowed in config");
+                Bukkit.broadcastMessage(Colors.RED + "A command block is trying to use the time stone. " +
+                        Colors.YELLOW + "(This is not allowed by the config god)");
+                return false;
+            }
         }else if (sender instanceof ConsoleCommandSender) {
             GreenStone.getPluginLogger().info("Executed by Console");
+            if(!GreenStone.getPlugin().config.getBoolean("allowExecutionViaConsole")) {
+                GreenStone.getPluginLogger().info("Console execution not allowed in config");
+                return false;
+            }
         }else {
             GreenStone.getPluginLogger().info("Executed by Player");
+            if(GreenStone.getPlugin().config.getBoolean("allowExecutionViaPlayer")) {
+                GreenStone.getPluginLogger().info("Player execution not allowed in config");
+                sender.sendMessage(Colors.RED + "Players are not allowed to use the time stone. " +
+                        Colors.YELLOW + "(This is not allowed by the config god)");
+                return false;
+            }
         }
 
         String[] subCommandArgs = new String[args.length - 1];
