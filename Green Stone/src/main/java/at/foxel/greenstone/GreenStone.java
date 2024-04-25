@@ -2,6 +2,7 @@ package at.foxel.greenstone;
 
 import at.foxel.greenstone.commands.Commands;
 import at.foxel.greenstone.listener.BlockListener;
+import at.foxel.greenstone.listener.InventoryListener;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,6 +27,7 @@ public final class GreenStone extends JavaPlugin {
             command.setExecutor(new Commands());
 
         getServer().getPluginManager().registerEvents(new BlockListener(), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
 
         //Setup config file
