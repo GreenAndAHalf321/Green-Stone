@@ -8,11 +8,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.LinkedList;
 
 public class Commands implements CommandExecutor {
     @Override
@@ -143,14 +144,28 @@ public class Commands implements CommandExecutor {
     }
 
     private boolean onPlaybacks(CommandSender sender) {
-        //TODO Make inventory size dynamic
-        Inventory playbacks = Bukkit.createInventory(null, 9*3, "Playbacks");
+        LinkedList<Recording> listOfPlaybacks = Recording.getFinishedRecordings();
 
-        //TODO add playbacks to inventory
-        playbacks.addItem(new ItemStack(Material.DIAMOND, 10));
+        byte inventoryRows = (byte) (listOfPlaybacks.size() / 9);
+
+        if(listOfPlaybacks.size() % 9.0 > 0)
+            inventoryRows++;
+
+        Inventory playbacks = Bukkit.createInventory(null, 9 * inventoryRows, "Playbacks");
+
+        for(Recording playback : listOfPlaybacks) {
+            ItemStack playbackItem = new ItemStack(Material.DIAMOND, 10);
+            ItemMeta playbackItemMeta = playbackItem.getItemMeta();
+
+            assert playbackItemMeta != null;
+            playbackItemMeta.setDisplayName(playback.getName());
+            playbackItem.setItemMeta(playbackItemMeta);
+
+            playbacks.addItem(playbackItem);
+        }
 
         ((Player) sender).openInventory(playbacks);
 
-        return false;
+        return true;
     }
 }
