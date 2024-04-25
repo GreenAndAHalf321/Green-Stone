@@ -20,6 +20,7 @@ public class Commands implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         GreenStone.getPluginLogger().info("Command " + label + " used");
 
+        //TODO Do not allow recording or playback while a playback/recording is running
         if(sender instanceof BlockCommandSender) {
             GreenStone.getPluginLogger().info("Executed by Command Block");
             if(!GreenStone.getPlugin().config.getBoolean("allowExecutionViaCommandBLock")) {
@@ -54,6 +55,7 @@ public class Commands implements CommandExecutor {
         if(args[0].equals("playback"))
             return onPlayback(subCommandArgs, sender);
 
+        //TODO only let a player execute this command
         if(args[0].equals("playbacks"))
             return  onPlaybacks(sender);
 
