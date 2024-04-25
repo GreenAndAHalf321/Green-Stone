@@ -54,6 +54,9 @@ public class Commands implements CommandExecutor {
         if(args[0].equals("playback"))
             return onPlayback(subCommandArgs, sender);
 
+        if(args[0].equals("playbacks"))
+            return  onPlaybacks(sender);
+
         return false;
     }
 
