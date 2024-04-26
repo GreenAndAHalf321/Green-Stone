@@ -37,7 +37,7 @@ public class Commands implements CommandExecutor {
             }
         }else {
             GreenStone.getPluginLogger().info("Executed by Player");
-            if(GreenStone.getPlugin().config.getBoolean("allowExecutionViaPlayer")) {
+            if(!GreenStone.getPlugin().config.getBoolean("allowExecutionViaPlayer")) {
                 GreenStone.getPluginLogger().info("Player execution not allowed in config");
                 sender.sendMessage(Colors.RED + "Players are not allowed to use the time stone. " +
                         Colors.YELLOW + "(This is not allowed by the config god)");
