@@ -1,10 +1,13 @@
 package at.foxel.greenstone.listener;
 
+import at.foxel.greenstone.Playback;
+import at.foxel.greenstone.Recording;
 import at.foxel.greenstone.useful.Colors;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class InventoryListener implements Listener {
 
@@ -14,11 +17,20 @@ public class InventoryListener implements Listener {
         if (!event.getView().getTitle().equals("Playbacks"))
             return;
 
-        //TODO start playback
+        ItemStack clickedItem = event.getCurrentItem();
+        if (clickedItem == null)
+            return;
+
+        for(Recording playback : Recording.getFinishedRecordings()) {
+            if(playback.getName().equals(clickedItem.getItemMeta().getDisplayName())) {
+                Playback.startPlayback(playback);
+                break;
+            }
+        }
 
         HumanEntity playerWhoClicked = event.getWhoClicked();
         playerWhoClicked.sendMessage(Colors.GREEN + "You started the playback " + Colors.YELLOW
-                + event.getCursor().getItemMeta().getDisplayName());
+                + clickedItem.getItemMeta().getDisplayName());
         playerWhoClicked.closeInventory();
         event.setCancelled(true);
     }
