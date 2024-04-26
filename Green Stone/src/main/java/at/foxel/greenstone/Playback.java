@@ -10,6 +10,7 @@ public class Playback {
     private static int currentPlaybackId;
 
     public static void startPlayback(Recording recording) {
+        //TODO Check if a playback or recording is already running
         recordingToPlayBack = recording;
 
         currentWorldState = recording.getWorldStates().getLast();

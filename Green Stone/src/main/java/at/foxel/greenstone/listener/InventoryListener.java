@@ -23,6 +23,7 @@ public class InventoryListener implements Listener {
 
         for(Recording playback : Recording.getFinishedRecordings()) {
             if(playback.getName().equals(clickedItem.getItemMeta().getDisplayName())) {
+                //TODO ask the player for confirmation if a playback or recording is already running
                 Playback.startPlayback(playback);
                 break;
             }
