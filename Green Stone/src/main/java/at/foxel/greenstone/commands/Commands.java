@@ -227,6 +227,8 @@ public class Commands implements CommandExecutor {
         for(int i = 0; i < emptySlots; i++)
             configs.addItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE));
 
+        ((Player) sender).openInventory(configs);
+
         return true;
     }
 }
