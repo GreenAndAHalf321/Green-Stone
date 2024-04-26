@@ -7,6 +7,7 @@ import at.foxel.greenstone.useful.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -58,6 +59,10 @@ public class Commands implements CommandExecutor {
         //TODO only let a player execute this command
         if(args[0].equals("playbacks"))
             return  onPlaybacks(sender);
+
+        //TODO only let a player execute this command
+        if(args[0].equals("config"))
+            return  onConfig(sender);
 
         return false;
     }
@@ -170,6 +175,57 @@ public class Commands implements CommandExecutor {
         }
 
         ((Player) sender).openInventory(playbacks);
+
+        return true;
+    }
+
+    private boolean onConfig(CommandSender sender) {
+        int emptySlots = 9*4;
+
+        Inventory configs = Bukkit.createInventory(null, emptySlots, "Config Settings");
+
+        FileConfiguration config = GreenStone.getPlugin().config;
+
+        configs.setItem(10, new ItemStack(Material.SKELETON_SKULL));
+        emptySlots--;
+        configs.setItem(11, new ItemStack(Material.SKELETON_SKULL));
+        emptySlots--;
+        configs.setItem(12, new ItemStack(Material.COMMAND_BLOCK));
+        emptySlots--;
+        configs.setItem(13, new ItemStack(Material.SKELETON_SKULL));
+        emptySlots--;
+        configs.setItem(14, new ItemStack(Material.AXOLOTL_SPAWN_EGG));
+        emptySlots--;
+        configs.setItem(15, new ItemStack(Material.GLASS_PANE));
+        emptySlots--;
+
+        ItemStack red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+        ItemMeta redMeta = red.getItemMeta();
+        ItemStack green = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        ItemMeta greenMeta = red.getItemMeta();
+
+        redMeta.setDisplayName(Colors.RED + "FALSE");
+        greenMeta.setDisplayName(Colors.GREEN + "TRUE");
+
+        red.setItemMeta(redMeta);
+        green.setItemMeta(greenMeta);
+
+        configs.setItem(19, config.getBoolean("allowExecutionViaPlayer") ? green : red);
+        emptySlots--;
+        configs.setItem(20, config.getBoolean("allowExecutionViaConsole") ? green : red);
+        emptySlots--;
+        configs.setItem(21, config.getBoolean("allowExecutionViaCommandBLock") ? green : red);
+        emptySlots--;
+        configs.setItem(22, config.getBoolean("recordPlayer") ? green : red);
+        emptySlots--;
+        configs.setItem(23, config.getBoolean("recordEntities") ? green : red);
+        emptySlots--;
+        configs.setItem(24, config.getBoolean("recordGaps") ? green : red);
+        emptySlots--;
+        //TODO Added settings for the time interval
+
+        for(int i = 0; i < emptySlots; i++)
+            configs.addItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE));
 
         return true;
     }
