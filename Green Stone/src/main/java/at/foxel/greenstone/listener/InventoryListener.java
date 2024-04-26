@@ -13,7 +13,7 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        //TODO Use somthing else instead of the String title
+        //TODO Use something else instead of the String title
         if (!event.getView().getTitle().equals("Playbacks"))
             return;
 
