@@ -30,7 +30,7 @@ public class Recording {
         @Override
         public void run() {
             if(blockUpdates.isEmpty())
-                if(GreenStone.getPlugin().config.getBoolean("recordGaps"))
+                if(!GreenStone.getPlugin().config.getBoolean("recordGaps"))
                     return;
 
             BlockState currentState;
