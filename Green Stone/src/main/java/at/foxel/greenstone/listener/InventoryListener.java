@@ -14,9 +14,13 @@ public class InventoryListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         //TODO Use something else instead of the String title
-        if (!event.getView().getTitle().equals("Playbacks"))
-            return;
+        if (event.getView().getTitle().equals("Playbacks"))
+            onPlaybacksClick(event);
+        else if ( event.getView().getTitle().equals("Config Settings"))
+            onConfigSettingsClick(event);
+    }
 
+    private void onPlaybacksClick(InventoryClickEvent event) {
         ItemStack clickedItem = event.getCurrentItem();
         if (clickedItem == null)
             return;
@@ -33,6 +37,16 @@ public class InventoryListener implements Listener {
         playerWhoClicked.sendMessage(Colors.GREEN + "You started the playback " + Colors.YELLOW
                 + clickedItem.getItemMeta().getDisplayName());
         playerWhoClicked.closeInventory();
+        event.setCancelled(true);
+    }
+
+    private void onConfigSettingsClick(InventoryClickEvent event) {
+        ItemStack clickedItem = event.getCurrentItem();
+        if (clickedItem == null)
+            return;
+
+        //TODO change config settings
+
         event.setCancelled(true);
     }
 }
