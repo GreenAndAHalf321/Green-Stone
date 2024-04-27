@@ -202,7 +202,7 @@ public class Commands implements CommandExecutor {
         ItemStack red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
         ItemMeta redMeta = red.getItemMeta();
         ItemStack green = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-        ItemMeta greenMeta = red.getItemMeta();
+        ItemMeta greenMeta = green.getItemMeta();
 
         redMeta.setDisplayName(Colors.RED + "FALSE");
         greenMeta.setDisplayName(Colors.GREEN + "TRUE");
