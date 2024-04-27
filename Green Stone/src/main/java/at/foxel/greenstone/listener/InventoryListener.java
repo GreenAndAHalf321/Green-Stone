@@ -7,6 +7,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class InventoryListener implements Listener {
@@ -16,7 +17,7 @@ public class InventoryListener implements Listener {
         //TODO Use something else instead of the String title
         if (event.getView().getTitle().equals("Playbacks"))
             onPlaybacksClick(event);
-        else if ( event.getView().getTitle().equals("Config Settings"))
+        else if (event.getView().getTitle().equals("Config Settings"))
             onConfigSettingsClick(event);
     }
 
@@ -41,11 +42,17 @@ public class InventoryListener implements Listener {
     }
 
     private void onConfigSettingsClick(InventoryClickEvent event) {
-        ItemStack clickedItem = event.getCurrentItem();
-        if (clickedItem == null)
-            return;
+        int slot = event.getSlot();
+        Inventory inv = event.getClickedInventory();
 
-        //TODO change config settings
+        ItemStack clickedItem = null;
+        assert inv != null;
+        if(slot >= 9)
+            clickedItem = inv.getItem(slot - 9);
+
+        assert clickedItem != null;
+
+        //TODO Change config data
 
         event.setCancelled(true);
     }
