@@ -186,17 +186,41 @@ public class Commands implements CommandExecutor {
 
         FileConfiguration config = GreenStone.getPlugin().config;
 
-        configs.setItem(10, new ItemStack(Material.SKELETON_SKULL));
+        ItemStack executionViaPlayer = new ItemStack(Material.ZOMBIE_HEAD);
+        ItemMeta executionViaPlayerMeta = executionViaPlayer.getItemMeta();
+        executionViaPlayerMeta.setDisplayName(Colors.WHITE + "Command execution via player");
+        executionViaPlayer.setItemMeta(executionViaPlayerMeta);
+        configs.setItem(10, executionViaPlayer);
         emptySlots--;
-        configs.setItem(11, new ItemStack(Material.SKELETON_SKULL));
+        ItemStack executionViaConsole = new ItemStack(Material.REDSTONE);
+        ItemMeta executionViaConsoleMeta = executionViaConsole.getItemMeta();
+        executionViaConsoleMeta.setDisplayName("Command execution via console");
+        executionViaConsole.setItemMeta(executionViaConsoleMeta);
+        configs.setItem(11, executionViaConsole);
         emptySlots--;
-        configs.setItem(12, new ItemStack(Material.COMMAND_BLOCK));
+        ItemStack executionViaCommandBlock = new ItemStack(Material.COMMAND_BLOCK);
+        ItemMeta executionViaCommandBlockMeta = executionViaCommandBlock.getItemMeta();
+        executionViaCommandBlockMeta.setDisplayName(Colors.WHITE + "Command execution via command block");
+        executionViaCommandBlock.setItemMeta(executionViaCommandBlockMeta);
+        configs.setItem(12, executionViaCommandBlock);
         emptySlots--;
-        configs.setItem(13, new ItemStack(Material.SKELETON_SKULL));
+        ItemStack recordPlayer = new ItemStack(Material.ZOMBIE_HEAD);
+        ItemMeta recordPlayerMeta = recordPlayer.getItemMeta();
+        recordPlayerMeta.setDisplayName(Colors.WHITE + "Record players");
+        recordPlayer.setItemMeta(recordPlayerMeta);
+        configs.setItem(13, recordPlayer);
         emptySlots--;
-        configs.setItem(14, new ItemStack(Material.AXOLOTL_SPAWN_EGG));
+        ItemStack recordEntities = new ItemStack(Material.AXOLOTL_SPAWN_EGG);
+        ItemMeta recordEntitiesMeta = recordEntities.getItemMeta();
+        recordEntitiesMeta.setDisplayName("Record entities like animals and monsters");
+        recordEntities.setItemMeta(recordEntitiesMeta);
+        configs.setItem(14, recordEntities);
         emptySlots--;
-        configs.setItem(15, new ItemStack(Material.GLASS_PANE));
+        ItemStack recordGaps = new ItemStack(Material.GLASS_PANE);
+        ItemMeta recordGapsMeta = recordGaps.getItemMeta();
+        recordGapsMeta.setDisplayName("Record gaps where no block has been changed");
+        recordGaps.setItemMeta(recordGapsMeta);
+        configs.setItem(15, recordGaps);
         emptySlots--;
 
         ItemStack red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
@@ -224,8 +248,13 @@ public class Commands implements CommandExecutor {
         emptySlots--;
         //TODO Added settings for the time interval
 
-        for(int i = 0; i < emptySlots; i++)
-            configs.addItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE));
+        for(int i = 0; i < emptySlots; i++) {
+            ItemStack nothing = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+            ItemMeta nothingMeta = nothing.getItemMeta();
+            nothingMeta.setDisplayName("§k" + i);
+            nothing.setItemMeta(nothingMeta);
+            configs.addItem(nothing);
+        }
 
         ((Player) sender).openInventory(configs);
 
