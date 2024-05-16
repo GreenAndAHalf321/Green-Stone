@@ -156,7 +156,11 @@ public class Commands implements CommandExecutor {
     private boolean onPlaybacks(CommandSender sender) {
         LinkedList<Recording> listOfPlaybacks = Recording.getFinishedRecordings();
 
-        byte inventoryRows = (byte) (listOfPlaybacks.size() / 9);
+        byte inventoryRows;
+        if(listOfPlaybacks.isEmpty())
+            inventoryRows = 1;
+        else
+            inventoryRows = (byte) (listOfPlaybacks.size() / 9);
 
         if(listOfPlaybacks.size() % 9.0 > 0)
             inventoryRows++;
