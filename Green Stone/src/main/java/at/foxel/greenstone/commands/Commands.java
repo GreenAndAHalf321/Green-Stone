@@ -168,7 +168,7 @@ public class Commands implements CommandExecutor {
         Inventory playbacks = Bukkit.createInventory(null, 9 * inventoryRows, "Playbacks");
 
         for(Recording playback : listOfPlaybacks) {
-            ItemStack playbackItem = new ItemStack(Material.DIAMOND, 10);
+            ItemStack playbackItem = new ItemStack(Material.REDSTONE);
             ItemMeta playbackItemMeta = playbackItem.getItemMeta();
 
             assert playbackItemMeta != null;
