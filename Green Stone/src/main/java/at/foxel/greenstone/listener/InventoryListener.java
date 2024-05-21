@@ -50,7 +50,7 @@ public class InventoryListener implements Listener {
         if(slot >= 9)
             clickedItem = inv.getItem(slot - 9);
 
-        assert clickedItem != null;
+            assert clickedItem != null : "Clicked item should not be null";
 
         //TODO Change config data
 
