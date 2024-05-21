@@ -1,5 +1,6 @@
 package at.foxel.greenstone.listener;
 
+import at.foxel.greenstone.GreenStone;
 import at.foxel.greenstone.Playback;
 import at.foxel.greenstone.Recording;
 import at.foxel.greenstone.useful.Colors;
@@ -44,6 +45,9 @@ public class InventoryListener implements Listener {
     private void onConfigSettingsClick(InventoryClickEvent event) {
         int slot = event.getSlot();
         Inventory inv = event.getClickedInventory();
+
+        if(inv == null)
+            return;
 
         ItemStack clickedItem = null;
         if(slot >= 9) {
