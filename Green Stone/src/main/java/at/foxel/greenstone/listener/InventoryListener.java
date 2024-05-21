@@ -56,6 +56,7 @@ public class InventoryListener implements Listener {
             if(clickedItem == null)
                 return;
 
+            //TODO update inventory after click
             String clikedName = clickedItem.getItemMeta().getDisplayName();
             if(clikedName.substring(2).equals("Command execution via player")) {
                 GreenStone.getPlugin().config.set("allowExecutionViaPlayer",  !GreenStone.getPlugin()
