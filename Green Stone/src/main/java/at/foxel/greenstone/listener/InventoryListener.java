@@ -53,7 +53,8 @@ public class InventoryListener implements Listener {
         if(slot >= 9) {
             clickedItem = inv.getItem(slot - 9);
 
-            assert clickedItem != null : "Clicked item should not be null";
+            if(clickedItem == null)
+                return;
 
             String clikedName = clickedItem.getItemMeta().getDisplayName();
             if(clikedName.substring(2).equals("Command execution via player")) {
