@@ -76,3 +76,10 @@ The **stop** command only works if a playback is loaded right now. If this is th
 
 > **/gs playback stop** => stops the currently loaded playback and loads the current world state
 
+## playbacks
+
+The command **/gs playbacks** opens up a menu were you can play all of your previews recorded playbacks
+
+## config
+
+The command **/gs config** opens up a menu were you can change to settings of the plugin
