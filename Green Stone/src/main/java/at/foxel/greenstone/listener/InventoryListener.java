@@ -82,9 +82,6 @@ public class InventoryListener implements Listener {
                 GreenStone.getPlugin().saveConfig();
             }
         }
-
-
-
         event.setCancelled(true);
     }
 }
