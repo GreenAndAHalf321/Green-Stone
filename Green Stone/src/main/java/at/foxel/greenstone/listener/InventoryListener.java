@@ -46,13 +46,40 @@ public class InventoryListener implements Listener {
         Inventory inv = event.getClickedInventory();
 
         ItemStack clickedItem = null;
-        assert inv != null;
-        if(slot >= 9)
+        if(slot >= 9) {
             clickedItem = inv.getItem(slot - 9);
 
             assert clickedItem != null : "Clicked item should not be null";
 
-        //TODO Change config data
+            String clikedName = clickedItem.getItemMeta().getDisplayName();
+            if(clikedName.substring(2).equals("Command execution via player")) {
+                GreenStone.getPlugin().config.set("allowExecutionViaPlayer",  !GreenStone.getPlugin()
+                        .config.getBoolean("allowExecutionViaPlayer"));
+                GreenStone.getPlugin().saveConfig();
+            } else if(clikedName.equals("Command execution via console")) {
+                GreenStone.getPlugin().config.set("allowExecutionViaConsole",  !GreenStone.getPlugin()
+                        .config.getBoolean("allowExecutionViaConsole"));
+                GreenStone.getPlugin().saveConfig();
+            } else if(clikedName.substring(2).equals("Command execution via command block")) {
+                GreenStone.getPlugin().config.set("allowExecutionViaCommandBLock",  !GreenStone.getPlugin()
+                        .config.getBoolean("allowExecutionViaCommandBLock"));
+                GreenStone.getPlugin().saveConfig();
+            } else if(clikedName.substring(2).equals("Record players")) {
+                GreenStone.getPlugin().config.set("recordPlayer",  !GreenStone.getPlugin()
+                        .config.getBoolean("recordPlayer"));
+                GreenStone.getPlugin().saveConfig();
+            } else if(clikedName.equals("Record entities like animals and monsters")) {
+                GreenStone.getPlugin().config.set("recordEntities",  !GreenStone.getPlugin()
+                        .config.getBoolean("recordEntities"));
+                GreenStone.getPlugin().saveConfig();
+            } else if(clikedName.equals("Record gaps where no block has been changed")) {
+                GreenStone.getPlugin().config.set("recordGaps",  !GreenStone.getPlugin()
+                        .config.getBoolean("recordGaps"));
+                GreenStone.getPlugin().saveConfig();
+            }
+        }
+
+
 
         event.setCancelled(true);
     }
