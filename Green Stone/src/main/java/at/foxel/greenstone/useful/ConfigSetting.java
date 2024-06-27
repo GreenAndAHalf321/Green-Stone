@@ -97,7 +97,7 @@ public class ConfigSetting {
         return defaultSetting;
     }
 
-    public LinkedList<ConfigSetting> getSettings() {
+    public static LinkedList<ConfigSetting> getSettings() {
         return (LinkedList<ConfigSetting>) settings.clone();
     }
 }
