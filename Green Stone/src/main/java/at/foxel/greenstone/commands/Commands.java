@@ -21,6 +21,8 @@ public class Commands implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         GreenStone.getPluginLogger().info("Command " + label + " used");
 
+        if(args.length == 0) return false;
+
         //TODO Do not allow recording or playback while a playback/recording is running
         if(sender instanceof BlockCommandSender) {
             GreenStone.getPluginLogger().info("Executed by Command Block");
