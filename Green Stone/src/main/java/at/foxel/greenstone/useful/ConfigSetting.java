@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class ConfigSetting {
 
-    private ConfigSetting(String id, String name, String description, Material material, boolean defaultSetting) {
+    private ConfigSetting(String id, String name, String description, Material material, Object defaultSetting) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -19,7 +19,7 @@ public class ConfigSetting {
     private final String name;
     private final String description;
     private final Material material;
-    private final boolean defaultSetting; //TODO change to object
+    private final Object defaultSetting;
 
     public static void setupConfig() {
         //===== Command execution ======
@@ -74,7 +74,7 @@ public class ConfigSetting {
                 "The default interval in which all changes to the world are saved in milliseconds (this only" +
                         "applies to recording where to interval is not specified)",
                 Material.RED_STAINED_GLASS_PANE,
-                false); //TODO change to int 1000
+                1000);
     }
 
     public String getId() {
@@ -93,7 +93,7 @@ public class ConfigSetting {
         return material;
     }
 
-    public boolean isDefaultSetting() {
+    public Object isDefaultSetting() {
         return defaultSetting;
     }
 
