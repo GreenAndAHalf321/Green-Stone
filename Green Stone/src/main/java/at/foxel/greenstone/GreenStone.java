@@ -3,6 +3,7 @@ package at.foxel.greenstone;
 import at.foxel.greenstone.commands.Commands;
 import at.foxel.greenstone.listener.BlockListener;
 import at.foxel.greenstone.listener.InventoryListener;
+import at.foxel.greenstone.useful.ConfigSetting;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,19 +30,13 @@ public final class GreenStone extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockListener(), this);
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
-
         //Setup config file
 
-        //Command Execution
-        config.addDefault("allowExecutionViaPlayer", true);
-        config.addDefault("allowExecutionViaConsole", false);
-        config.addDefault("allowExecutionViaCommandBLock", false);
+        ConfigSetting.setupConfig();
 
-        //Recording
-        config.addDefault("recordPlayer", false);
-        config.addDefault("recordEntities", false);
-        config.addDefault("recordGaps", false);
-        config.addDefault("defaultRecordingIntervalInMilliseconds", 1000);
+        for (ConfigSetting setting : ConfigSetting.getSettings()) {
+            config.addDefault(setting.getId(), setting.getDefaultSetting());
+        }
 
         config.options().copyDefaults(true);
         saveConfig();
