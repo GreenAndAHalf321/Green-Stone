@@ -93,7 +93,7 @@ public class ConfigSetting {
         return material;
     }
 
-    public Object isDefaultSetting() {
+    public Object getDefaultSetting() {
         return defaultSetting;
     }
 
