@@ -113,7 +113,7 @@ public class Recording {
     private void saveRecording() {
 
         try{
-            Path path = Paths.get("plugins\\Recordings");
+            Path path = Paths.get("plugins\\Green_Stone\\Recordings");
 
             if(!Files.exists(path))
                 Files.createDirectory(path);
