@@ -42,7 +42,7 @@ public class ConfigSetting {
                 "allowExecutionViaCommandBLock",
                 Colors.WHITE + "Command execution via command block",
                 "Allows command blocks to use this plugins commands",
-                Material.REDSTONE,
+                Material.COMMAND_BLOCK,
                 false);
 
         //===== Recording =====

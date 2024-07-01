@@ -4,6 +4,7 @@ import at.foxel.greenstone.GreenStone;
 import at.foxel.greenstone.Playback;
 import at.foxel.greenstone.Recording;
 import at.foxel.greenstone.useful.Colors;
+import at.foxel.greenstone.useful.ConfigSetting;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.*;
@@ -186,48 +187,13 @@ public class Commands implements CommandExecutor {
     }
 
     private boolean onConfig(CommandSender sender) {
+        assert !ConfigSetting.getSettings().isEmpty() : "No config settings do exist. This should not be the case";
+
         int emptySlots = 9*4;
 
         Inventory configs = Bukkit.createInventory(null, emptySlots, "Config Settings");
 
         FileConfiguration config = GreenStone.getPlugin().config;
-
-        ItemStack executionViaPlayer = new ItemStack(Material.ZOMBIE_HEAD);
-        ItemMeta executionViaPlayerMeta = executionViaPlayer.getItemMeta();
-        executionViaPlayerMeta.setDisplayName(Colors.WHITE + "Command execution via player");
-        executionViaPlayer.setItemMeta(executionViaPlayerMeta);
-        configs.setItem(10, executionViaPlayer);
-        emptySlots--;
-        ItemStack executionViaConsole = new ItemStack(Material.REDSTONE);
-        ItemMeta executionViaConsoleMeta = executionViaConsole.getItemMeta();
-        executionViaConsoleMeta.setDisplayName("Command execution via console");
-        executionViaConsole.setItemMeta(executionViaConsoleMeta);
-        configs.setItem(11, executionViaConsole);
-        emptySlots--;
-        ItemStack executionViaCommandBlock = new ItemStack(Material.COMMAND_BLOCK);
-        ItemMeta executionViaCommandBlockMeta = executionViaCommandBlock.getItemMeta();
-        executionViaCommandBlockMeta.setDisplayName(Colors.WHITE + "Command execution via command block");
-        executionViaCommandBlock.setItemMeta(executionViaCommandBlockMeta);
-        configs.setItem(12, executionViaCommandBlock);
-        emptySlots--;
-        ItemStack recordPlayer = new ItemStack(Material.ZOMBIE_HEAD);
-        ItemMeta recordPlayerMeta = recordPlayer.getItemMeta();
-        recordPlayerMeta.setDisplayName(Colors.WHITE + "Record players");
-        recordPlayer.setItemMeta(recordPlayerMeta);
-        configs.setItem(13, recordPlayer);
-        emptySlots--;
-        ItemStack recordEntities = new ItemStack(Material.AXOLOTL_SPAWN_EGG);
-        ItemMeta recordEntitiesMeta = recordEntities.getItemMeta();
-        recordEntitiesMeta.setDisplayName("Record entities like animals and monsters");
-        recordEntities.setItemMeta(recordEntitiesMeta);
-        configs.setItem(14, recordEntities);
-        emptySlots--;
-        ItemStack recordGaps = new ItemStack(Material.GLASS_PANE);
-        ItemMeta recordGapsMeta = recordGaps.getItemMeta();
-        recordGapsMeta.setDisplayName("Record gaps where no block has been changed");
-        recordGaps.setItemMeta(recordGapsMeta);
-        configs.setItem(15, recordGaps);
-        emptySlots--;
 
         ItemStack red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
         ItemMeta redMeta = red.getItemMeta();
@@ -240,18 +206,27 @@ public class Commands implements CommandExecutor {
         red.setItemMeta(redMeta);
         green.setItemMeta(greenMeta);
 
-        configs.setItem(19, config.getBoolean("allowExecutionViaPlayer") ? green : red);
-        emptySlots--;
-        configs.setItem(20, config.getBoolean("allowExecutionViaConsole") ? green : red);
-        emptySlots--;
-        configs.setItem(21, config.getBoolean("allowExecutionViaCommandBLock") ? green : red);
-        emptySlots--;
-        configs.setItem(22, config.getBoolean("recordPlayer") ? green : red);
-        emptySlots--;
-        configs.setItem(23, config.getBoolean("recordEntities") ? green : red);
-        emptySlots--;
-        configs.setItem(24, config.getBoolean("recordGaps") ? green : red);
-        emptySlots--;
+        int configAmount = ConfigSetting.getSettings().size();
+        int startIndex = (int) Math.ceil(13 - configAmount * 0.5);
+        for(int i = 0; i < configAmount; i++) {
+            ConfigSetting setting = ConfigSetting.getSettings().get(i);
+            ItemStack item = new ItemStack(setting.getMaterial());
+            ItemMeta itemMeta = item.getItemMeta();
+            itemMeta.setDisplayName(setting.getName());
+            //itemMeta.setLore(); //TODO Add description
+            item.setItemMeta(itemMeta);
+            configs.setItem(i + startIndex, item);
+
+            if(setting.getDefaultSetting() instanceof Boolean)
+                configs.setItem(i + startIndex + 9, config.getBoolean(setting.getId()) ? green : red);
+            else
+                emptySlots++;
+
+            emptySlots -= 2;
+
+            if(i == 6)
+                break;
+        }
         //TODO Added settings for the time interval
 
         for(int i = 0; i < emptySlots; i++) {

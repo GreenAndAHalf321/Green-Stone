@@ -11,3 +11,4 @@ at\foxel\greenstone\BlockState.class
 at\foxel\greenstone\GreenStone.class
 at\foxel\greenstone\listener\InventoryListener.class
 at\foxel\greenstone\Playback.class
+at\foxel\greenstone\useful\ConfigSetting.class
