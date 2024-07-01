@@ -189,6 +189,8 @@ public class Commands implements CommandExecutor {
     private boolean onConfig(CommandSender sender) {
         assert !ConfigSetting.getSettings().isEmpty() : "No config settings do exist. This should not be the case";
 
+        //TODO Add more pages if their are more than 7 settings to change
+
         int emptySlots = 9*4;
 
         Inventory configs = Bukkit.createInventory(null, emptySlots, "Config Settings");
@@ -217,6 +219,7 @@ public class Commands implements CommandExecutor {
             item.setItemMeta(itemMeta);
             configs.setItem(i + startIndex, item);
 
+            //TODO Add additional page for changing values that are not boolish
             if(setting.getDefaultSetting() instanceof Boolean)
                 configs.setItem(i + startIndex + 9, config.getBoolean(setting.getId()) ? green : red);
             else
@@ -227,7 +230,6 @@ public class Commands implements CommandExecutor {
             if(i == 6)
                 break;
         }
-        //TODO Added settings for the time interval
 
         for(int i = 0; i < emptySlots; i++) {
             ItemStack nothing = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
