@@ -201,12 +201,16 @@ public class Commands implements CommandExecutor {
         ItemMeta redMeta = red.getItemMeta();
         ItemStack green = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
         ItemMeta greenMeta = green.getItemMeta();
+        ItemStack orange = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
+        ItemMeta orangeMeta = orange.getItemMeta();
 
         redMeta.setDisplayName(Colors.RED + "FALSE");
         greenMeta.setDisplayName(Colors.GREEN + "TRUE");
+        orangeMeta.setDisplayName(Colors.YELLOW + "OPEN SETTINGS");
 
         red.setItemMeta(redMeta);
         green.setItemMeta(greenMeta);
+        orange.setItemMeta(orangeMeta);
 
         int configAmount = ConfigSetting.getSettings().size();
         int startIndex = (int) Math.ceil(13 - configAmount * 0.5);
@@ -219,11 +223,10 @@ public class Commands implements CommandExecutor {
             item.setItemMeta(itemMeta);
             configs.setItem(i + startIndex, item);
 
-            //TODO Add additional page for changing values that are not boolish
             if(setting.getDefaultSetting() instanceof Boolean)
                 configs.setItem(i + startIndex + 9, config.getBoolean(setting.getId()) ? green : red);
             else
-                emptySlots++;
+                configs.setItem(i + startIndex + 9, orange); //TODO display current value
 
             emptySlots -= 2;
 
