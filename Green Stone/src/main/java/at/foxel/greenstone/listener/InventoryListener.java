@@ -4,6 +4,9 @@ import at.foxel.greenstone.GreenStone;
 import at.foxel.greenstone.Playback;
 import at.foxel.greenstone.Recording;
 import at.foxel.greenstone.useful.Colors;
+import at.foxel.greenstone.useful.ConfigSetting;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -57,31 +60,19 @@ public class InventoryListener implements Listener {
                 return;
 
             //TODO update inventory after click
-            String clikedName = clickedItem.getItemMeta().getDisplayName();
-            if(clikedName.substring(2).equals("Command execution via player")) {
-                GreenStone.getPlugin().config.set("allowExecutionViaPlayer",  !GreenStone.getPlugin()
-                        .config.getBoolean("allowExecutionViaPlayer"));
-                GreenStone.getPlugin().saveConfig();
-            } else if(clikedName.equals("Command execution via console")) {
-                GreenStone.getPlugin().config.set("allowExecutionViaConsole",  !GreenStone.getPlugin()
-                        .config.getBoolean("allowExecutionViaConsole"));
-                GreenStone.getPlugin().saveConfig();
-            } else if(clikedName.substring(2).equals("Command execution via command block")) {
-                GreenStone.getPlugin().config.set("allowExecutionViaCommandBLock",  !GreenStone.getPlugin()
-                        .config.getBoolean("allowExecutionViaCommandBLock"));
-                GreenStone.getPlugin().saveConfig();
-            } else if(clikedName.substring(2).equals("Record players")) {
-                GreenStone.getPlugin().config.set("recordPlayer",  !GreenStone.getPlugin()
-                        .config.getBoolean("recordPlayer"));
-                GreenStone.getPlugin().saveConfig();
-            } else if(clikedName.equals("Record entities like animals and monsters")) {
-                GreenStone.getPlugin().config.set("recordEntities",  !GreenStone.getPlugin()
-                        .config.getBoolean("recordEntities"));
-                GreenStone.getPlugin().saveConfig();
-            } else if(clikedName.equals("Record gaps where no block has been changed")) {
-                GreenStone.getPlugin().config.set("recordGaps",  !GreenStone.getPlugin()
-                        .config.getBoolean("recordGaps"));
-                GreenStone.getPlugin().saveConfig();
+            Material clikedItemMaterial = clickedItem.getType();
+            FileConfiguration config = GreenStone.getPlugin().config;
+
+            for(ConfigSetting setting : ConfigSetting.getSettings()) {
+                if(setting.getMaterial().equals(clikedItemMaterial)) {
+                    if(setting.getDefaultSetting() instanceof Boolean) {
+                        config.set(setting.getId(), !config.getBoolean(setting.getId()));
+                        config.saveToString();
+                    } else {
+                        //TODO Add page for changing non boolish values
+                    }
+                    break;
+                }
             }
         }
         event.setCancelled(true);
