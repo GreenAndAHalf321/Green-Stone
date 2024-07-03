@@ -3,6 +3,7 @@ package at.foxel.greenstone.listener;
 import at.foxel.greenstone.GreenStone;
 import at.foxel.greenstone.Playback;
 import at.foxel.greenstone.Recording;
+import at.foxel.greenstone.commands.Commands;
 import at.foxel.greenstone.useful.Colors;
 import at.foxel.greenstone.useful.ConfigSetting;
 import org.bukkit.Material;
@@ -59,7 +60,6 @@ public class InventoryListener implements Listener {
             if(clickedItem == null)
                 return;
 
-            //TODO update inventory after click
             Material clikedItemMaterial = clickedItem.getType();
             FileConfiguration config = GreenStone.getPlugin().config;
 
@@ -75,6 +75,11 @@ public class InventoryListener implements Listener {
                 }
             }
         }
+
+        int slots = inv.getSize();
+        inv.clear();
+        Commands.buildConfigMenu(inv, slots);
+
         event.setCancelled(true);
     }
 }

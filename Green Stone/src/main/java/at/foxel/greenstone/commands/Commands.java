@@ -186,14 +186,7 @@ public class Commands implements CommandExecutor {
         return true;
     }
 
-    private boolean onConfig(CommandSender sender) {
-        assert !ConfigSetting.getSettings().isEmpty() : "No config settings do exist. This should not be the case";
-
-        //TODO Add more pages if their are more than 7 settings to change
-
-        int emptySlots = 9*4;
-
-        Inventory configs = Bukkit.createInventory(null, emptySlots, "Config Settings");
+    public static void buildConfigMenu(Inventory configs, int slots) {
 
         FileConfiguration config = GreenStone.getPlugin().config;
 
@@ -228,19 +221,32 @@ public class Commands implements CommandExecutor {
             else
                 configs.setItem(i + startIndex + 9, orange); //TODO display current value
 
-            emptySlots -= 2;
+            slots -= 2;
 
             if(i == 6)
                 break;
         }
 
-        for(int i = 0; i < emptySlots; i++) {
+        for(int i = 0; i < slots; i++) {
             ItemStack nothing = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
             ItemMeta nothingMeta = nothing.getItemMeta();
             nothingMeta.setDisplayName("§k" + i);
             nothing.setItemMeta(nothingMeta);
             configs.addItem(nothing);
         }
+
+    }
+
+    private boolean onConfig(CommandSender sender) {
+        assert !ConfigSetting.getSettings().isEmpty() : "No config settings do exist. This should not be the case";
+
+        //TODO Add more pages if their are more than 7 settings to change
+
+        int slots = 9*4;
+
+        Inventory configs = Bukkit.createInventory(null, slots, "Config Settings");
+
+        buildConfigMenu(configs, slots);
 
         ((Player) sender).openInventory(configs);
 
