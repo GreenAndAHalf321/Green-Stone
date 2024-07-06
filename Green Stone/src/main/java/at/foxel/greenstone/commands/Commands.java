@@ -218,8 +218,12 @@ public class Commands implements CommandExecutor {
 
             if(setting.getDefaultSetting() instanceof Boolean)
                 configs.setItem(i + startIndex + 9, config.getBoolean(setting.getId()) ? green : red);
-            else
-                configs.setItem(i + startIndex + 9, orange); //TODO display current value
+            else {
+                orangeMeta.getLore().add("The current value is " + config.get(setting.getId()));
+                orange.setItemMeta(orangeMeta);
+                configs.setItem(i + startIndex + 9, orange);
+                orangeMeta.getLore().clear();
+            }
 
             slots -= 2;
 
