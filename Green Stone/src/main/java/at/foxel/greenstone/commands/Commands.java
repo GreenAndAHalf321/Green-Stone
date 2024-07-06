@@ -212,7 +212,7 @@ public class Commands implements CommandExecutor {
             ItemStack item = new ItemStack(setting.getMaterial());
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(setting.getName());
-            //itemMeta.setLore(); //TODO Add description
+            itemMeta.getLore().add(setting.getDescription());
             item.setItemMeta(itemMeta);
             configs.setItem(i + startIndex, item);
 
