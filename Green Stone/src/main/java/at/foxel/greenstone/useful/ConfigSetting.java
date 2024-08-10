@@ -26,15 +26,15 @@ public class ConfigSetting {
         //Allow execution via Player
         new ConfigSetting(
                 "allowExecutionViaPlayer",
-                "Command execution via player",
-                "Allows players to use this plugins commands (admins are alway allowed to do so)",
+                Colors.RESET + Colors.WHITE + "Command execution via player",
+                "Allows players to use this plugins commands (admins are always allowed to do so)",
                 Material.ZOMBIE_HEAD,
                 true);
         //Allow execution via Console
         new ConfigSetting(
                 "allowExecutionViaConsole",
-                "Command execution via console",
-                "Allows the servers console to use this plugins Commands",
+                Colors.RESET + "Command execution via console",
+                "Allows the servers console to use this plugins commands",
                 Material.REDSTONE,
                 false);
         //Allow execution via command block
@@ -63,16 +63,16 @@ public class ConfigSetting {
         //Record gaps
         new ConfigSetting(
                 "recordGaps",
-                "Record gaps where no block has been changed",
+                Colors.RESET + "Record gaps where no block has been changed",
                 "Also includes the moments were nothing has happened in the recording",
                 Material.GLASS_PANE,
                 false);
         //Default recording interval in milliseconds
         new ConfigSetting(
                 "defaultRecordingIntervalInMilliseconds",
-                "Default recording interval",
-                "The default interval in which all changes to the world are saved in milliseconds (this only" +
-                        "applies to recording where to interval is not specified)",
+                Colors.RESET + "Default recording interval",
+                "The default interval in which all changes to the world are saved in milliseconds \n(this only " +
+                        "applies to recordings where to interval is not specified)",
                 Material.RED_STAINED_GLASS_PANE,
                 1000);
     }
