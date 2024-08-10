@@ -18,5 +18,6 @@ public class Colors {
     public final static String LIGHT_PURPLE = "§D";
     public final static String YELLOW = "§E";
     public final static String WHITE = "§F";
+    public final static String RESET = "§r";
 
 }
