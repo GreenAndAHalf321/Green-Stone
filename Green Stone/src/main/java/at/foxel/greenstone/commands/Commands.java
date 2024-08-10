@@ -207,19 +207,24 @@ public class Commands implements CommandExecutor {
 
         int configAmount = ConfigSetting.getSettings().size();
         int startIndex = (int) Math.ceil(13 - configAmount * 0.5);
+        LinkedList<String> itemLore = new LinkedList<>();
         for(int i = 0; i < configAmount; i++) {
             ConfigSetting setting = ConfigSetting.getSettings().get(i);
             ItemStack item = new ItemStack(setting.getMaterial());
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(setting.getName());
-            itemMeta.getLore().add(setting.getDescription());
+            itemLore.clear();
+            itemLore.add(setting.getDescription());
+            itemMeta.setLore(itemLore);
             item.setItemMeta(itemMeta);
             configs.setItem(i + startIndex, item);
 
             if(setting.getDefaultSetting() instanceof Boolean)
                 configs.setItem(i + startIndex + 9, config.getBoolean(setting.getId()) ? green : red);
             else {
-                orangeMeta.getLore().add("The current value is " + config.get(setting.getId()));
+                itemLore.clear();
+                itemLore.add("The current value is " + config.get(setting.getId()));
+                orangeMeta.setLore(itemLore);
                 orange.setItemMeta(orangeMeta);
                 configs.setItem(i + startIndex + 9, orange);
                 orangeMeta.getLore().clear();
