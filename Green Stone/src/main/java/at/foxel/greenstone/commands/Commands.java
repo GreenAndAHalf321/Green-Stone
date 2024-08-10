@@ -227,7 +227,6 @@ public class Commands implements CommandExecutor {
                 orangeMeta.setLore(itemLore);
                 orange.setItemMeta(orangeMeta);
                 configs.setItem(i + startIndex + 9, orange);
-                orangeMeta.getLore().clear();
             }
 
             slots -= 2;
