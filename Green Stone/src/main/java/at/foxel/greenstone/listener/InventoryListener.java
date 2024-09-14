@@ -69,7 +69,9 @@ public class InventoryListener implements Listener {
                         config.set(setting.getId(), !config.getBoolean(setting.getId()));
                         config.saveToString();
                     } else {
-                        //TODO Add page for changing non boolish values
+                        Commands.openSettings(inv, setting);
+                        event.setCancelled(true); //TODO Remove this later
+                        return;
                     }
                     break;
                 }
@@ -78,7 +80,7 @@ public class InventoryListener implements Listener {
 
         int slots = inv.getSize();
         inv.clear();
-        Commands.buildConfigMenu(inv, slots);
+        Commands.buildConfigMenu(inv, slots); //TODO Add update method that does not recreate the whole inv
 
         event.setCancelled(true);
     }

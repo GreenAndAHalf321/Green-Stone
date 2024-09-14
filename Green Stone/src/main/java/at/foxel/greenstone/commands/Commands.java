@@ -19,7 +19,9 @@ import java.util.LinkedList;
 
 public class Commands implements CommandExecutor {
 
+    //TODO Move away with buildConfigMenu and openSetting
     final static byte MIDDLE_OF_INV = 13;
+    final static byte INV_ROW_SIZE = 9;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
@@ -189,6 +191,7 @@ public class Commands implements CommandExecutor {
         return true;
     }
 
+    //TODO Move this method somewhere else
     public static void buildConfigMenu(Inventory configs, int slots) {
 
         FileConfiguration config = GreenStone.getPlugin().config;
@@ -208,9 +211,8 @@ public class Commands implements CommandExecutor {
         green.setItemMeta(greenMeta);
         orange.setItemMeta(orangeMeta);
 
-        int startIndex = (int) Math.ceil(MIDDLE_OF_INV - configAmount * 0.5);
         int configAmount = ConfigSetting.getSettings().size();
-        int startIndex = (int) Math.ceil(13 - configAmount * 0.5);
+        int startIndex = (int) Math.ceil(MIDDLE_OF_INV - configAmount * 0.5);
         LinkedList<String> itemLore = new LinkedList<>();
         for(int i = 0; i < configAmount; i++) {
             ConfigSetting setting = ConfigSetting.getSettings().get(i);
@@ -247,6 +249,43 @@ public class Commands implements CommandExecutor {
             configs.addItem(nothing);
         }
 
+    }
+
+    //TODO move this method somewhere else
+    public static void openSettings(Inventory configs, ConfigSetting setting) {
+        GreenStone.getPluginLogger().info("Clearing inventory...");
+        configs.clear(); //TODO Remove this later
+
+        FileConfiguration config = GreenStone.getPlugin().config;
+
+        ItemStack red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+        ItemMeta redMeta = red.getItemMeta();
+        ItemStack green = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        ItemMeta greenMeta = green.getItemMeta();
+        ItemStack orange = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
+        ItemMeta orangeMeta = orange.getItemMeta();
+
+        redMeta.setDisplayName(Colors.RED + "SUBTRACT 10");
+        greenMeta.setDisplayName(Colors.GREEN + "ADD 10");
+        orangeMeta.setDisplayName(Colors.YELLOW + config.get(setting.getId()));
+
+        red.setItemMeta(redMeta);
+        green.setItemMeta(greenMeta);
+        orange.setItemMeta(orangeMeta);
+
+        ItemStack settingsIcon = new ItemStack(setting.getMaterial());
+        configs.setItem(MIDDLE_OF_INV, settingsIcon);
+        configs.setItem(MIDDLE_OF_INV + INV_ROW_SIZE, orange);
+        configs.setItem(MIDDLE_OF_INV + INV_ROW_SIZE + 1, red);
+        configs.setItem(MIDDLE_OF_INV + INV_ROW_SIZE - 1, green);
+
+        for(int i = 0; i < 32; i++) { //TODO Do not use magic number
+            ItemStack nothing = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+            ItemMeta nothingMeta = nothing.getItemMeta();
+            nothingMeta.setDisplayName("§k" + i);
+            nothing.setItemMeta(nothingMeta);
+            configs.addItem(nothing);
+        }
     }
 
     private boolean onConfig(CommandSender sender) {
