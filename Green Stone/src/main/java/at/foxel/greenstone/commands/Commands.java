@@ -18,6 +18,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 
 public class Commands implements CommandExecutor {
+
+    final static byte MIDDLE_OF_INV = 13;
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         GreenStone.getPluginLogger().info("Command " + label + " used");
@@ -205,6 +208,7 @@ public class Commands implements CommandExecutor {
         green.setItemMeta(greenMeta);
         orange.setItemMeta(orangeMeta);
 
+        int startIndex = (int) Math.ceil(MIDDLE_OF_INV - configAmount * 0.5);
         int configAmount = ConfigSetting.getSettings().size();
         int startIndex = (int) Math.ceil(13 - configAmount * 0.5);
         LinkedList<String> itemLore = new LinkedList<>();
