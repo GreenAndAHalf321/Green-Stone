@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class InventoryListener implements Listener {
+    final static byte INV_ROW_SIZE = 9;
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
@@ -61,14 +62,11 @@ public class InventoryListener implements Listener {
         if(inv == null)
             return;
 
-        ItemStack clickedItem = null;
         if(slot >= 9) {
-            clickedItem = inv.getItem(slot - 9);
-
-            if(clickedItem == null)
+            if(inv.getItem(slot - INV_ROW_SIZE) == null)
                 return;
 
-            Material clikedItemMaterial = clickedItem.getType();
+            Material clikedItemMaterial = inv.getItem(slot - INV_ROW_SIZE).getType();
             FileConfiguration config = GreenStone.getPlugin().config;
 
             for(ConfigSetting setting : ConfigSetting.getSettings()) {
@@ -88,7 +86,6 @@ public class InventoryListener implements Listener {
         //}
 
         //TODO Do not clear the inv when nothing happened
-        int slots = inv.getSize();
         byte slots = (byte) inv.getSize();
         inv.clear();
         Commands.buildConfigMenu(inv, slots); //TODO Add update method that does not recreate the whole inv
