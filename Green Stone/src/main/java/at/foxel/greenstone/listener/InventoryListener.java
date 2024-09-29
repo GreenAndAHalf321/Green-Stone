@@ -55,7 +55,7 @@ public class InventoryListener implements Listener {
     }
 
     private void onConfigSettingsClick(InventoryClickEvent event) {
-        int slot = event.getSlot();
+        byte slot = (byte) event.getSlot();
         Inventory inv = event.getClickedInventory();
 
         if(inv == null)
@@ -89,6 +89,7 @@ public class InventoryListener implements Listener {
 
         //TODO Do not clear the inv when nothing happened
         int slots = inv.getSize();
+        byte slots = (byte) inv.getSize();
         inv.clear();
         Commands.buildConfigMenu(inv, slots); //TODO Add update method that does not recreate the whole inv
 
