@@ -206,7 +206,7 @@ public class Commands implements CommandExecutor {
 
         redMeta.setDisplayName(Colors.RED + "FALSE");
         greenMeta.setDisplayName(Colors.GREEN + "TRUE");
-        orangeMeta.setDisplayName(Colors.YELLOW + "OPEN SETTINGS");
+        orangeMeta.setDisplayName(Colors.YELLOW + "WORK IN PROGRESS");
 
         red.setItemMeta(redMeta);
         green.setItemMeta(greenMeta);

@@ -17,6 +17,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class InventoryListener implements Listener {
 
@@ -72,37 +73,15 @@ public class InventoryListener implements Listener {
                         config.set(setting.getId(), !config.getBoolean(setting.getId()));
                         config.saveToString();
                     } else {
-                        Commands.openSettings((Player) event.getWhoClicked(), setting);
-                        event.setCancelled(true); //TODO Remove this later
-                        return;
+                        //TODO Use Anvil GUI
+                        //Commands.openSettings((Player) event.getWhoClicked(), setting);
                     }
                     break;
                 }
             }
-        } else if (inv.getType().equals(InventoryType.ANVIL)) {
-            clickedItem = event.getCurrentItem();
-
-            if(clickedItem == null)
-                return;
-
-            String newValue = clickedItem.getItemMeta().getDisplayName();
-            if(!newValue.matches("\\d+")) {
-                GreenStone.getPluginLogger().info("Wrong input: " + newValue);
-                event.setCancelled(true);
-                return;
-            }
-
-            FileConfiguration config = GreenStone.getPlugin().config;
-            for(ConfigSetting setting : ConfigSetting.getSettings())
-                if(event.getView().getTitle().contains(setting.getName())) {
-                    config.set(setting.getId(), Integer.parseInt(newValue));
-                    config.saveToString();
-                }
-
-            //TODO Change this!!!
-            inv = Bukkit.createInventory(null, 9*4, "Config Settings");
-            event.getWhoClicked().openInventory(inv);
-        }
+        } //else if (inv.getType().equals(InventoryType.ANVIL)) {
+            //TODO Use AnvilGUI by WesJD
+        //}
 
         //TODO Do not clear the inv when nothing happened
         int slots = inv.getSize();
