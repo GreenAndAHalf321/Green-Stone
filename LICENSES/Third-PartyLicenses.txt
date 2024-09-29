@@ -1,0 +1,15 @@
+
+Lists of 13 third-party dependencies.
+     (The Apache Software License, Version 2.0) FindBugs-jsr305 (com.google.code.findbugs:jsr305:3.0.2 - http://findbugs.sourceforge.net/)
+     (Apache-2.0) Gson (com.google.code.gson:gson:2.10.1 - https://github.com/google/gson/gson)
+     (Apache 2.0) error-prone annotations (com.google.errorprone:error_prone_annotations:2.18.0 - https://errorprone.info/error_prone_annotations)
+     (The Apache Software License, Version 2.0) Guava InternalFutureFailureAccess and InternalFutures (com.google.guava:failureaccess:1.0.1 - https://github.com/google/guava/failureaccess)
+     (Apache License, Version 2.0) Guava: Google Core Libraries for Java (com.google.guava:guava:32.1.2-jre - https://github.com/google/guava)
+     (The Apache Software License, Version 2.0) Guava ListenableFuture only (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava - https://github.com/google/guava/listenablefuture)
+     (Apache License, Version 2.0) J2ObjC Annotations (com.google.j2objc:j2objc-annotations:2.8 - https://github.com/google/j2objc/)
+     (Modified BSD 3-Clause License) BungeeCord-Chat (net.md-5:bungeecord-chat:1.20-R0.2 - https://github.com/SpigotMC/BungeeCord/bungeecord-chat)
+     (The MIT License) Checker Qual (org.checkerframework:checker-qual:3.33.0 - https://checkerframework.org/)
+     (The Apache Software License, Version 2.0) JetBrains Java Annotations (org.jetbrains:annotations:16.0.1 - https://github.com/JetBrains/java-annotations)
+     (MIT License) JOML (org.joml:joml:1.10.5 - http://joml.org)
+     (Unknown license) Spigot-API (org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT - https://www.spigotmc.org/)
+     (Apache License, Version 2.0) SnakeYAML (org.yaml:snakeyaml:2.2 - https://bitbucket.org/snakeyaml/snakeyaml)

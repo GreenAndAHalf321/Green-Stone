@@ -1,3 +1,7 @@
+// © 2024 Foxel e.U.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 package at.foxel.greenstone;
 
 import at.foxel.greenstone.useful.DoubleReferenceNode;
