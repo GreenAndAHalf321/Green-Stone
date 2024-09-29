@@ -25,7 +25,7 @@ public class InventoryListener implements Listener {
         //TODO Use something else instead of the String title
         if (event.getView().getTitle().equals("Playbacks"))
             onPlaybacksClick(event);
-        else if (event.getView().getTitle().equals("Config Settings"))
+        else if (event.getView().getTitle().equals("Config Settings") || event.getView().getTitle().contains("Change "))
             onConfigSettingsClick(event);
     }
 
