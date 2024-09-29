@@ -78,6 +78,7 @@ public class InventoryListener implements Listener {
             }
         }
 
+        //TODO Do not clear the inv when nothing happened
         int slots = inv.getSize();
         inv.clear();
         Commands.buildConfigMenu(inv, slots); //TODO Add update method that does not recreate the whole inv
