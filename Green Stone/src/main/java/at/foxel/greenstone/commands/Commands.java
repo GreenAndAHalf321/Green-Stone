@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -252,40 +253,17 @@ public class Commands implements CommandExecutor {
     }
 
     //TODO move this method somewhere else
-    public static void openSettings(Inventory configs, ConfigSetting setting) {
-        GreenStone.getPluginLogger().info("Clearing inventory...");
-        configs.clear(); //TODO Remove this later
-
-        FileConfiguration config = GreenStone.getPlugin().config;
-
-        ItemStack red = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        ItemMeta redMeta = red.getItemMeta();
-        ItemStack green = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
-        ItemMeta greenMeta = green.getItemMeta();
-        ItemStack orange = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
-        ItemMeta orangeMeta = orange.getItemMeta();
-
-        redMeta.setDisplayName(Colors.RED + "SUBTRACT 10");
-        greenMeta.setDisplayName(Colors.GREEN + "ADD 10");
-        orangeMeta.setDisplayName(Colors.YELLOW + config.get(setting.getId()));
-
-        red.setItemMeta(redMeta);
-        green.setItemMeta(greenMeta);
-        orange.setItemMeta(orangeMeta);
+    public static void openSettings(Player player, ConfigSetting setting) {
+        GreenStone.getPluginLogger().info("Opening editor...");
+        Inventory editor = Bukkit.createInventory(null, InventoryType.ANVIL, "Change " + setting.getName() + " value");
+        player.openInventory(editor);
 
         ItemStack settingsIcon = new ItemStack(setting.getMaterial());
-        configs.setItem(MIDDLE_OF_INV, settingsIcon);
-        configs.setItem(MIDDLE_OF_INV + INV_ROW_SIZE, orange);
-        configs.setItem(MIDDLE_OF_INV + INV_ROW_SIZE + 1, red);
-        configs.setItem(MIDDLE_OF_INV + INV_ROW_SIZE - 1, green);
+        ItemMeta settingsIconMeta = settingsIcon.getItemMeta();
+        settingsIconMeta.setDisplayName(setting.getDefaultSetting().toString());
+        settingsIcon.setItemMeta(settingsIconMeta);
 
-        for(int i = 0; i < 32; i++) { //TODO Do not use magic number
-            ItemStack nothing = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-            ItemMeta nothingMeta = nothing.getItemMeta();
-            nothingMeta.setDisplayName("§k" + i);
-            nothing.setItemMeta(nothingMeta);
-            configs.addItem(nothing);
-        }
+        editor.addItem(settingsIcon);
     }
 
     private boolean onConfig(CommandSender sender) {

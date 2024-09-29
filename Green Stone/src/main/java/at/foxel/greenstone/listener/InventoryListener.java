@@ -6,12 +6,15 @@ import at.foxel.greenstone.Recording;
 import at.foxel.greenstone.commands.Commands;
 import at.foxel.greenstone.useful.Colors;
 import at.foxel.greenstone.useful.ConfigSetting;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -69,13 +72,36 @@ public class InventoryListener implements Listener {
                         config.set(setting.getId(), !config.getBoolean(setting.getId()));
                         config.saveToString();
                     } else {
-                        Commands.openSettings(inv, setting);
+                        Commands.openSettings((Player) event.getWhoClicked(), setting);
                         event.setCancelled(true); //TODO Remove this later
                         return;
                     }
                     break;
                 }
             }
+        } else if (inv.getType().equals(InventoryType.ANVIL)) {
+            clickedItem = event.getCurrentItem();
+
+            if(clickedItem == null)
+                return;
+
+            String newValue = clickedItem.getItemMeta().getDisplayName();
+            if(!newValue.matches("\\d+")) {
+                GreenStone.getPluginLogger().info("Wrong input: " + newValue);
+                event.setCancelled(true);
+                return;
+            }
+
+            FileConfiguration config = GreenStone.getPlugin().config;
+            for(ConfigSetting setting : ConfigSetting.getSettings())
+                if(event.getView().getTitle().contains(setting.getName())) {
+                    config.set(setting.getId(), Integer.parseInt(newValue));
+                    config.saveToString();
+                }
+
+            //TODO Change this!!!
+            inv = Bukkit.createInventory(null, 9*4, "Config Settings");
+            event.getWhoClicked().openInventory(inv);
         }
 
         //TODO Do not clear the inv when nothing happened
