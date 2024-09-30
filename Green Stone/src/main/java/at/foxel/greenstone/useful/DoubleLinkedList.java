@@ -1,4 +1,4 @@
-// © 2024 Foxel e.U.
+// © 2024 Florian Wallner
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
